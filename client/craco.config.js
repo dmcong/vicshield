@@ -20,7 +20,7 @@ module.exports = {
     {
       plugin: CracoTheme,
       options: {
-       theme:['light','dark'],
+        theme: ['light', 'dark'],
       },
     },
     {

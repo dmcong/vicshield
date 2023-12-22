@@ -1,7 +1,31 @@
 {
-  "name": "react-solana-template",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@project-serum/anchor": "^0.25.0",
     "@react-pdf-viewer/core": "^3.9.0",
@@ -26,30 +50,6 @@
     "react-scripts": "5.0.1",
     "react-use": "^17.4.0",
     "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@craco/craco": "^7.0.0",
