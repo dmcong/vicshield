@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import type { MenuProps } from 'antd'
-import { Button, Col, Drawer, Layout, Menu, Row, Typography } from 'antd'
+import { Col, Drawer, Layout, Menu, Row } from 'antd'
 import { COLORS } from '../themes/colors'
 import VictionIcon from '../victionIcon'
 import { MenuOutlined } from '@ant-design/icons'
+import { Styles } from '../type/styles.type'
 import BtnConnectWallet from 'components/base-btn/BtnConnectWallet'
 
-interface Styles {
-  [keys: string]: React.CSSProperties
-}
 const items: MenuProps['items'] = [
   {
     label: 'Solution',
@@ -43,6 +41,7 @@ const styles: Styles = {
   },
   menu: {
     borderWidth: 0,
+    justifyContent: 'center',
   },
   button: {
     borderRadius: 50,
@@ -69,7 +68,7 @@ const TopMenu = () => {
     setCurrent(e.key)
   }
 
-  const renderMenuReponsive = () => {
+  const renderHamburger = () => {
     return (
       <Layout
         className={'hamburgerMenu'}
@@ -83,7 +82,7 @@ const TopMenu = () => {
           style={{ height: 100, width: 100, fontSize: 20 }}
           onClick={showDrawer}
         />
-        <Drawer width={520} closable={false} onClose={onClose} open={open}>
+        <Drawer width={250} closable={false} onClose={onClose} open={open}>
           <VictionIcon />
           <Menu
             onClick={onClick}
@@ -119,7 +118,7 @@ const TopMenu = () => {
           </Col>
         </Row>
       </Layout>
-      {renderMenuReponsive()}
+      {renderHamburger()}
     </>
   )
 }

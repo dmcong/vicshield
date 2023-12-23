@@ -1,10 +1,7 @@
 import React from 'react'
 import { Image, Layout, Typography } from 'antd'
 import images from './assets/images'
-
-interface Styles {
-  [key: string]: React.CSSProperties
-}
+import { Styles } from './type/styles.type'
 
 const styles: Styles = {
   layout: {

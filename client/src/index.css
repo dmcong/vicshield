@@ -1,7 +1,3 @@
-* {
-  font-family: 'Inter', sans-serif !important;
-}
-
 .title-word {
   color: #da9438;
   animation: color-animation 4s linear infinite;
@@ -57,4 +53,8 @@
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.borderNone{
+    border-width: 0
 }

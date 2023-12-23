@@ -1,12 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { Col, Layout, Row } from 'antd'
+import { Col, Divider, Layout, Row } from 'antd'
 import { Content, Footer } from 'antd/lib/layout/layout'
-import Banner from './banner'
 import Management from './management'
-import ContractWatcher from 'watcher/contract.watcher'
-import SignerWatcher from 'watcher/signer.watcher'
 import Home from './home'
 import ContractDetail from './contractDetail'
 import { useDispatch } from 'react-redux'
@@ -17,6 +14,8 @@ import { Security } from './securiry'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import TopMenu from '../components/topMenu'
+import BannerHero from './bannerHero/bannerHero'
+import CharacteristicsBanner from './characteristicsBanner/characteristicsBanner'
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -36,17 +35,25 @@ const App: React.FC = () => {
   useEffect(() => {
     loadData()
   }, [loadData])
-
   return (
     <UILoader>
       <Layout>
         <TopMenu />
-        <ContractWatcher />
-        <SignerWatcher />
+        <Divider style={{ borderWidth: 0 }} />
         <Content>
           <Row justify="center">
             <Col span={24}>
-              <Banner />
+              <BannerHero
+                title={'Sign with Confidence, Transact with Transparency'}
+                content={
+                  'VicShield - A next-gen digital signature and contract protection program.\n' +
+                  'Digitize traditional contracts but still ensure safety and security.'
+                }
+              />
+            </Col>
+
+            <Col span={24}>
+              <CharacteristicsBanner />
             </Col>
 
             <Col span={24} style={{ minHeight: 350 }}>
