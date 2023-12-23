@@ -1,18 +1,16 @@
 import { Col, Row } from 'antd'
 import PdfReviewer from 'components/pdf/pdfReviewer'
-import { useContractFile } from 'hooks/useContracts'
+// import { useContractFile } from 'hooks/useContracts'
 
 const ContractReviewFile = ({
   contractAddress,
 }: {
   contractAddress: string
 }) => {
-  const file = useContractFile(contractAddress)
+  // const file = useContractFile(contractAddress)
   return (
     <Row>
-      <Col span={24}>
-        <PdfReviewer base64Str={file} />
-      </Col>
+      <Col span={24}>{/*<PdfReviewer base64Str={file} />*/}</Col>
     </Row>
   )
 }

@@ -1,22 +1,18 @@
 import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import store from 'store'
 import View from './view'
 import reportWebVitals from './reportWebVitals'
-import WalletProvider from 'providers/Wallet.provider'
+import WalletProvider from './providers/Wallet.provider'
 
 import 'static/styles/index.less'
-import './index.css'
+import 'index.less'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <BrowserRouter>
     <WalletProvider>
-      <Provider store={store}>
-        <View />
-      </Provider>
+      <View />
     </WalletProvider>
   </BrowserRouter>,
 )

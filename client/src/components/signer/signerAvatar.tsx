@@ -1,10 +1,11 @@
 import { Avatar } from 'antd'
-import { useSignerMetaData } from 'hooks/useSigners'
+// import { useSignerMetaData } from 'hooks/useSigners'
 
 const SignerAvatar = ({ uid }: { uid: number }) => {
-  const user = useSignerMetaData(uid)
+  // const user = useSignerMetaData(uid)
 
-  return <Avatar src={user?.picture?.thumbnail} />
+  // return <Avatar src={user?.picture?.thumbnail} />
+  return <></>
 }
 
 export default SignerAvatar

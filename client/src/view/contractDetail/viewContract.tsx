@@ -5,27 +5,27 @@ import ContractSigners from 'components/contract/contractSigners'
 import ExploreAddress from 'components/exploreAddress'
 import PdfViewer from 'components/pdf/pdfViewer'
 
-import { useContractFile, useContractMetadata } from 'hooks/useContracts'
+// import { useContractFile, useContractMetadata } from 'hooks/useContracts'
 import ContractStatusTag from './contractStateTag'
 import './index.less'
 
 const { Paragraph } = Typography
 
 const ViewContract = ({ contractAddress }: { contractAddress: string }) => {
-  const metadata = useContractMetadata(contractAddress)
-  const file = useContractFile(contractAddress)
+  // const metadata = useContractMetadata(contractAddress)
+  // const file = useContractFile(contractAddress)
 
   return (
     <Row>
       <Col span={24} data-aos="zoom-in" data-aos-delay="350">
         <PageHeader
           onBack={() => window.history.back()}
-          title={metadata.title}
+          // title={metadata.title}
           className="site-page-header"
           subTitle={<ExploreAddress address={contractAddress} />}
           tags={<ContractStatusTag contractAddress={contractAddress} />}
           extra={[
-            <PdfViewer base64Str={file} title={metadata?.title} />,
+            // <PdfViewer base64Str={file} title={metadata?.title} />,
             <ButtonSignContract contractAddress={contractAddress} />,
           ]}
           avatar={{
@@ -33,9 +33,9 @@ const ViewContract = ({ contractAddress }: { contractAddress: string }) => {
           }}
         >
           <Row gutter={[12, 12]}>
-            <Col span={24}>
-              <Paragraph>{metadata.description}</Paragraph>
-            </Col>
+            {/*<Col span={24}>*/}
+            {/*  <Paragraph>{metadata.description}</Paragraph>*/}
+            {/*</Col>*/}
 
             <Col span={24}>
               <ContractReviewFile contractAddress={contractAddress} />
