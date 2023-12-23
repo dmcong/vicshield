@@ -1,14 +1,11 @@
 import { Col, Empty, PageHeader, Row, Space, Spin, Tag, Typography } from 'antd'
 import Table, { ColumnsType } from 'antd/lib/table'
 import ExploreAddress from 'components/exploreAddress'
-import { useContracts } from 'hooks/useContracts'
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { MetadataService } from 'utils'
 import ButtonSignContract from 'components/contract/buttonSignContract'
-
-import { useLoadingContracts } from 'watcher/contract.watcher'
 
 export enum ContractStatus {
   Open = 'Open',
@@ -28,44 +25,43 @@ interface WrapContractType {
 }
 
 export const useWrapContracts = () => {
-  const contracts = useContracts()
   const [wrapContracts, setWrapContracts] = useState<WrapContractType[]>([])
 
-  const buildWrapContracts = useCallback(async () => {
-    const wrapContracts: Record<string, WrapContractType> = {}
-    let idx = 1
-    for (const address in contracts) {
-      const { totalSigned, totalSigner, expiredAt, hash } = contracts[address]
-      const metadata = await MetadataService.getMetadata(
-        Buffer.from(hash).toString('hex'),
-      )
-      wrapContracts[address] = {
-        no: idx++,
-        createAt: new Date(),
-        address,
-        title: metadata?.title || '',
-        totalSigner: Number(totalSigner.toString()),
-        totalSigned: Number(totalSigned.toString()),
-        status: ContractStatus.Open,
-        endAt: new Date(expiredAt.toNumber() * 1000),
-        hash: Buffer.from(hash).toString('hex'),
-      }
+  // const buildWrapContracts = useCallback(async () => {
+  //   const wrapContracts: Record<string, WrapContractType> = {}
+  //   let idx = 1
+  //   for (const address in contracts) {
+  //     const { totalSigned, totalSigner, expiredAt, hash } = contracts[address]
+  //     const metadata = await MetadataService.getMetadata(
+  //       Buffer.from(hash).toString('hex'),
+  //     )
+  //     wrapContracts[address] = {
+  //       no: idx++,
+  //       createAt: new Date(),
+  //       address,
+  //       title: metadata?.title || '',
+  //       totalSigner: Number(totalSigner.toString()),
+  //       totalSigned: Number(totalSigned.toString()),
+  //       status: ContractStatus.Open,
+  //       endAt: new Date(expiredAt.toNumber() * 1000),
+  //       hash: Buffer.from(hash).toString('hex'),
+  //     }
+  //
+  //     if (totalSigner === totalSigned)
+  //       wrapContracts[address].status = ContractStatus.Approved
+  //     else if (new Date().getTime() / 1000 > expiredAt.toNumber())
+  //       wrapContracts[address].status = ContractStatus.Expired
+  //   }
+  //
+  //   return setWrapContracts(Object.values(wrapContracts))
+  // }, [contracts])
 
-      if (totalSigner === totalSigned)
-        wrapContracts[address].status = ContractStatus.Approved
-      else if (new Date().getTime() / 1000 > expiredAt.toNumber())
-        wrapContracts[address].status = ContractStatus.Expired
-    }
-
-    return setWrapContracts(Object.values(wrapContracts))
-  }, [contracts])
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      buildWrapContracts()
-    }, 300)
-    return () => clearTimeout(timeout)
-  }, [buildWrapContracts])
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     buildWrapContracts()
+  //   }, 300)
+  //   return () => clearTimeout(timeout)
+  // }, [buildWrapContracts])
 
   return wrapContracts
 }
@@ -150,7 +146,6 @@ const columns: ColumnsType<WrapContractType> = [
 
 const Management = () => {
   const contracts = useWrapContracts()
-  const [loadContract] = useLoadingContracts()
 
   return (
     <Row gutter={[24, 24]} justify="center">
@@ -169,21 +164,21 @@ const Management = () => {
             ></PageHeader>
           </Col>
           <Col span={24}>
-            {loadContract ? (
-              <Spin spinning tip="loading">
-                <Empty description="" />
-              </Spin>
-            ) : (
-              <Row>
-                <Col span={24} data-aos="zoom-in">
-                  <Table
-                    columns={columns}
-                    dataSource={contracts}
-                    rowKey={(e) => e.address}
-                  />
-                </Col>
-              </Row>
-            )}
+            {/*{loadContract ? (*/}
+            {/*  <Spin spinning tip="loading">*/}
+            {/*    <Empty description="" />*/}
+            {/*  </Spin>*/}
+            {/*) : (*/}
+            {/*  <Row>*/}
+            {/*    <Col span={24} data-aos="zoom-in">*/}
+            {/*      <Table*/}
+            {/*        columns={columns}*/}
+            {/*        dataSource={contracts}*/}
+            {/*        rowKey={(e) => e.address}*/}
+            {/*      />*/}
+            {/*    </Col>*/}
+            {/*  </Row>*/}
+            {/*)}*/}
           </Col>
         </Row>
       </Col>
