@@ -16,6 +16,7 @@ import UILoader from 'uiloader'
 import { Security } from './securiry'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
+import TopMenu from '../components/topMenu'
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -39,6 +40,7 @@ const App: React.FC = () => {
   return (
     <UILoader>
       <Layout>
+        <TopMenu />
         <ContractWatcher />
         <SignerWatcher />
         <Content>

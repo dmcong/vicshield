@@ -28,7 +28,7 @@ function PdfReviewer({ base64Str }: { base64Str: string }) {
   return (
     <Row justify="center">
       <Col span={24}>
-        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.1.81/build/pdf.worker.min.js">
+        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
           <div
             style={{
               border: '1px solid rgba(0, 0, 0, 0.3)',
