@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
+import { JwtModule } from '@nestjs/jwt'
 
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -25,6 +26,17 @@ import { UserModule } from './user/user.module'
     }),
     ContractModule,
     UserModule,
+    JwtModule.registerAsync({
+      useFactory: async (
+        configService: ConfigService<EnvironmentVariables>,
+      ) => {
+        return {
+          global: true,
+          secret: configService.get('jwt').secret,
+          signOptions: { expiresIn: configService.get('jwt').ttl },
+        }
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
