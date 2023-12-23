@@ -1,3 +1,7 @@
+* {
+  font-family: 'Inter', sans-serif !important;
+}
+
 .title-word {
   color: #da9438;
   animation: color-animation 4s linear infinite;
@@ -40,13 +44,17 @@
 }
 
 @media screen and (min-width: 800px) {
-    .hamburgerMenu{
-        display:none;
-    }
+  .hamburgerMenu {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 800px) {
-    .menu {
-        display:none;
-    }
+  .menu {
+    display: none;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
