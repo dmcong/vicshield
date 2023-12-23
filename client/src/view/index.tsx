@@ -7,10 +7,7 @@ import Management from './management'
 import Home from './home'
 import ContractDetail from './contractDetail'
 import { useDispatch } from 'react-redux'
-import { AppDispatch } from 'store'
-import { initUsers } from 'store/users.controller'
 import UILoader from 'uiloader'
-import { Security } from './securiry'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import TopMenu from '../components/topMenu'
@@ -18,23 +15,24 @@ import BannerHero from './bannerHero/bannerHero'
 import CharacteristicsBanner from './characteristicsBanner/characteristicsBanner'
 
 const App: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>()
+  // const dispatch = useDispatch<AppDispatch>()
   const [loading, setLoading] = useState(true)
 
   useEffect(function () {
     Aos.init({ duration: 1000 })
   }, [])
 
-  const loadData = useCallback(async () => {
-    if (!loading) return
-    await dispatch(initUsers())
+  // const loadData = useCallback(async () => {
+  //   if (!loading) return
+  //   await dispatch(initUsers())
+  //
+  //   setLoading(false)
+  // }, [dispatch, loading])
+  //
+  // useEffect(() => {
+  //   loadData()
+  // }, [loadData])
 
-    setLoading(false)
-  }, [dispatch, loading])
-
-  useEffect(() => {
-    loadData()
-  }, [loadData])
   return (
     <UILoader>
       <Layout>
@@ -60,22 +58,8 @@ const App: React.FC = () => {
               <Routes>
                 <Route path="/home" element={<Home />} />
 
-                <Route
-                  path="/contract/:hash"
-                  element={
-                    <Security>
-                      <ContractDetail />
-                    </Security>
-                  }
-                />
-                <Route
-                  path="/management"
-                  element={
-                    <Security>
-                      <Management />
-                    </Security>
-                  }
-                />
+                <Route path="/contract/:hash" element={<>/contract/:hash</>} />
+                <Route path="/management" element={<>management</>} />
 
                 <Route path="/*" element={<Home />} />
               </Routes>

@@ -3,29 +3,19 @@
 Firstly, install dependencies:
 
 ```bash
-yarn install
+make install
 ```
 
-Then, run project locally (includes client and server):
+Then, run project locally:
 
 ```bash
-yarn start
+make dev-client
 ```
 
-## To add a package to project:
-
-### Client
-
 ```bash
-yarn workspace client add <your-package>
-```
-
-### Server
-
-```bash
-yarn workspace server add <your-package>
+make dev-server
 ```
 
 # ⚠️ Warning ⚠️
 
-### All command must be executed in project root
+### All above commands must be executed in project root
