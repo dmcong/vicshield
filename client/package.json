@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "craco start",
     "build": "craco build",
+    "start": "serve -s build -l 3000",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "clean": "rm -rf ./build && rm -rf .turbo"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +54,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.0.0",
     "@sentre/craco-plugins": "^2.0.2",
     "@testing-library/jest-dom": "^5.16.5",
