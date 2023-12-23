@@ -1,0 +1,19 @@
+@import 'static/styles/common/vars.os.less';
+
+.btn-connect-wallet {
+  button {
+    background: @PRIMARY !important;
+    border-radius: 32px !important;
+    font-size: 14px !important;
+    height: 40px;
+
+    & > div:nth-child(2) {
+      height: 36px;
+      margin-right: 10px;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      border: 1px solid darken(@PRIMARY, 10%);
+    }
+  }
+}

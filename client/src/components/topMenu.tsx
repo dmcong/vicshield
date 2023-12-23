@@ -4,6 +4,7 @@ import { Button, Col, Drawer, Layout, Menu, Row, Typography } from 'antd'
 import { COLORS } from '../themes/colors'
 import VictionIcon from '../victionIcon'
 import { MenuOutlined } from '@ant-design/icons'
+import BtnConnectWallet from 'components/base-btn/BtnConnectWallet'
 
 interface Styles {
   [keys: string]: React.CSSProperties
@@ -91,11 +92,7 @@ const TopMenu = () => {
             mode={'inline'}
             items={items}
           />
-          <Button style={styles.button}>
-            <Typography.Text style={styles.vicShield}>
-              Use Vicshield
-            </Typography.Text>
-          </Button>
+          <BtnConnectWallet />
         </Drawer>
       </Layout>
     )
@@ -118,11 +115,7 @@ const TopMenu = () => {
             />
           </Col>
           <Col flex={0}>
-            <Button style={styles.button}>
-              <Typography.Text style={styles.vicShield}>
-                Use Vicshield
-              </Typography.Text>
-            </Button>
+            <BtnConnectWallet />
           </Col>
         </Row>
       </Layout>
