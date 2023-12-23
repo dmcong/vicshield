@@ -38,7 +38,7 @@ function PdfViewer({ base64Str, title }: { base64Str: string; title: string }) {
       >
         <Row justify="center">
           <Col span={24}>
-            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.1.81/build/pdf.worker.min.js">
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
               <Viewer fileUrl={url} theme="dark" />
             </Worker>
           </Col>

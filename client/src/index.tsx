@@ -1,42 +1,23 @@
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import {
-  Coin98WalletAdapter,
-  PhantomWalletAdapter,
-} from '@solana/wallet-adapter-wallets'
-import {
-  ConnectionProvider,
-  WalletProvider,
-} from '@solana/wallet-adapter-react'
 
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
-
-import 'static/styles/index.less'
 import store from 'store'
 import View from './view'
-import configs from 'configs'
 import reportWebVitals from './reportWebVitals'
+import WalletProvider from 'providers/Wallet.provider'
+
+import 'static/styles/index.less'
 import './index.css'
-const {
-  rpc: { endpoint },
-} = configs
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <BrowserRouter>
-    <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider
-        wallets={[new PhantomWalletAdapter(), new Coin98WalletAdapter()]}
-        autoConnect
-      >
-        <WalletModalProvider>
-          <Provider store={store}>
-            <View />
-          </Provider>
-        </WalletModalProvider>
-      </WalletProvider>
-    </ConnectionProvider>
+    <WalletProvider>
+      <Provider store={store}>
+        <View />
+      </Provider>
+    </WalletProvider>
   </BrowserRouter>,
 )
 

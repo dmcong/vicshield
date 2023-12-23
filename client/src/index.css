@@ -38,3 +38,15 @@
   font-weight: 30;
   font-size: 70px;
 }
+
+@media screen and (min-width: 800px) {
+    .hamburgerMenu{
+        display:none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .menu {
+        display:none;
+    }
+}
