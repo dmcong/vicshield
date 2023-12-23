@@ -28,15 +28,14 @@ contract VicContractFactory is VRC25 {
     address[] memory _signatories,
     uint256 _expirationDate,
     uint256 _contractValue,
-    address payable _recipient,
-    uint256 _threshold
+    address payable _recipient
   ) public {
     ContractData storage c = contracts[contractsCount++];
     c.contractHash = _contractHash;
     c.expirationDate = _expirationDate;
     c.contractValue = _contractValue;
     c.recipient = _recipient;
-    c.threshold = _threshold;
+    c.threshold = _signatories.length;
     for (uint i = 0; i < _signatories.length; i++) {
       c.signatories[_signatories[i]] = true;
       _mint(_signatories[i], 1);

@@ -45,7 +45,6 @@ describe('VicContract', function () {
       expirationDate,
       1,
       signer.address,
-      1,
       await getRequestOptions(),
     )
     await tx.wait()
