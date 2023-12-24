@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Image, Row, Typography } from 'antd'
-import images from './static/images'
-import { Styles } from './type/styles.type'
+import images from 'static/images'
+import { Styles } from 'type/styles.type'
 import { useNavigate } from 'react-router-dom'
 
 const styles: Styles = {
@@ -12,9 +12,10 @@ const styles: Styles = {
   },
   vicShield: {
     fontWeight: 'bold',
+    fontSize: 20,
   },
 }
-const VictionIcon = () => {
+const Brand = () => {
   const navigate = useNavigate()
   const handleNavigateHome = () => {
     navigate('/')
@@ -22,7 +23,7 @@ const VictionIcon = () => {
   return (
     <Row
       onClick={handleNavigateHome}
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: 'pointer', width: 150 }}
       align={'middle'}
     >
       <Col>
@@ -35,4 +36,4 @@ const VictionIcon = () => {
   )
 }
 
-export default VictionIcon
+export default Brand

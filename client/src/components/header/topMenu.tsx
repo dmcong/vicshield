@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
-import type { MenuProps } from 'antd'
 import { Col, Drawer, Menu, Row } from 'antd'
-import { COLORS } from '../themes/colors'
-import VictionIcon from '../victionIcon'
 import { MenuOutlined } from '@ant-design/icons'
-import { Styles } from '../type/styles.type'
+
+import Brand from 'components/system/brand'
 import BtnConnectWallet from 'components/base-btn/BtnConnectWallet'
-import { useAppSelector } from '../store/rootStore'
-import { selectIsMobile } from '../store/common/common.slice'
+
+import useIsMobile from 'hooks/system/useIsMobile'
+
+import { COLORS } from 'themes/colors'
+
+import { Styles } from 'type/styles.type'
+import type { MenuProps } from 'antd'
+
+import './index.less'
 
 const items: MenuProps['items'] = [
   {
@@ -25,10 +30,6 @@ const items: MenuProps['items'] = [
   {
     label: 'Pricing',
     key: '4',
-  },
-  {
-    label: 'Pricing',
-    key: '5',
   },
 ]
 
@@ -57,7 +58,7 @@ const styles: Styles = {
 const TopMenu = () => {
   const [current, setCurrent] = useState('mail')
   const [open, setOpen] = useState(false)
-  const isMobile = useAppSelector(selectIsMobile)
+  const isMobile = useIsMobile()
   const showDrawer = () => {
     setOpen(true)
   }
@@ -81,7 +82,7 @@ const TopMenu = () => {
       >
         <Row align={'middle'} style={{ flex: 1 }}>
           <Col flex={5}>
-            <VictionIcon />
+            <Brand />
           </Col>
           <Col flex={0.5}>
             <BtnConnectWallet />
@@ -111,13 +112,14 @@ const TopMenu = () => {
       {!isMobile ? (
         <Row className={'menu'} style={styles.container}>
           <Row justify={'space-between'} align={'middle'} style={{ flex: 1 }}>
-            <VictionIcon />
+            <Brand />
             <Menu
               onClick={onClick}
               style={styles.menu}
               selectedKeys={[current]}
               mode="horizontal"
               items={items}
+              className="menu-header"
             />
             <BtnConnectWallet />
           </Row>

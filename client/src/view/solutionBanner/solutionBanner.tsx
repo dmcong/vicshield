@@ -3,11 +3,10 @@ import { COLORS } from '../../themes/colors'
 import React from 'react'
 import images from '../../static/images'
 import { Styles } from '../../type/styles.type'
-import { useAppSelector } from '../../store/rootStore'
-import { selectIsMobile } from '../../store/common/common.slice'
+import useIsMobile from 'hooks/system/useIsMobile'
 
 const SolutionBanner = () => {
-  const isMobile = useAppSelector(selectIsMobile)
+  const isMobile = useIsMobile()
 
   const renderImage = () => {
     return (
@@ -106,7 +105,6 @@ const SolutionBanner = () => {
         <Col>
           <Typography.Title style={styles.title}>Solutions</Typography.Title>
         </Col>
-        <Divider className={'borderNone'} />
         <Col>
           <p style={styles.content}>
             Our platform strives to revolutionize digital signature security by

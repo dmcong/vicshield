@@ -3,8 +3,8 @@ import { COLORS } from '../../themes/colors'
 import React from 'react'
 import images from '../../static/images'
 import { Styles } from '../../type/styles.type'
-import { useAppSelector } from '../../store/rootStore'
-import { selectIsMobile } from '../../store/common/common.slice'
+import Spline from '@splinetool/react-spline'
+import useIsMobile from 'hooks/system/useIsMobile'
 
 type TBanner = {
   title: string
@@ -13,7 +13,7 @@ type TBanner = {
 
 const BannerHero = (props: TBanner) => {
   const { title, content } = props
-  const isMobile = useAppSelector(selectIsMobile)
+  const isMobile = useIsMobile()
   return (
     <Row justify={!isMobile ? 'center' : undefined} style={styles.container}>
       <Col span={isMobile ? 24 : 16}>
@@ -37,7 +37,8 @@ const BannerHero = (props: TBanner) => {
       </Col>
       {!isMobile && (
         <Col span={8}>
-          <Image preview={false} src={images['hero']} />
+          {/*<Image preview={false} src={images['hero']} />*/}
+          <Spline scene="https://prod.spline.design/KwxVa0MQiYfIyzEE/scene.splinecode" />
         </Col>
       )}
     </Row>

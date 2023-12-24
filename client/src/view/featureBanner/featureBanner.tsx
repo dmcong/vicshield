@@ -1,13 +1,12 @@
 import React from 'react'
-import { useAppSelector } from '../../store/rootStore'
-import { selectIsMobile } from '../../store/common/common.slice'
 import { Col, Divider, Image, Row, Typography } from 'antd'
 import { Styles } from '../../type/styles.type'
 import { COLORS } from '../../themes/colors'
 import images from '../../static/images'
+import useIsMobile from 'hooks/system/useIsMobile'
 
 const FeatureBanner = () => {
-  const isMobile = useAppSelector(selectIsMobile)
+  const isMobile = useIsMobile()
   const renderTitle = () => {
     return (
       <Col span={24} style={isMobile ? undefined : styles.colTitleContent}>
