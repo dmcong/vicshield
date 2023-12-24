@@ -15,7 +15,10 @@ function FooterContact() {
   const isMobile = useIsMobile()
 
   return (
-    <Row style={!isMobile ? { padding: '0 120px' } : {}}>
+    <Row
+      style={{ padding: !isMobile ? '0 120px' : '0 16px' }}
+      gutter={!isMobile ? undefined : [0, 32]}
+    >
       <Col span={!isMobile ? 14 : 24}>
         <Row>
           <Col span={12}>

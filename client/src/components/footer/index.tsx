@@ -3,14 +3,17 @@ import FooterSubscription from './FooterSubscription'
 import FooterContact from 'components/footer/FooterContact'
 
 import './index.less'
+import useIsMobile from 'hooks/system/useIsMobile'
 
 function Footer() {
+  const isMobile = useIsMobile()
+
   return (
     <Layout.Footer
       style={{
         background: '#111827',
         borderRadius: 16,
-        padding: '64px 0',
+        padding: isMobile ? '32px 0' : '64px 0',
         fontSize: 16,
       }}
     >

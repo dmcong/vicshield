@@ -1,8 +1,10 @@
 const {
+  CracoTheme,
   CracoAppLessPlugin,
   CracoCompatibility,
+  CracoWasm,
   CracoSilence,
-  CracoTheme,
+  CracoAnalyzer,
 } = require('@sentre/craco-plugins')
 
 module.exports = {
@@ -27,7 +29,13 @@ module.exports = {
       plugin: CracoCompatibility,
     },
     {
+      plugin: CracoWasm,
+    },
+    {
       plugin: CracoSilence,
+    },
+    {
+      plugin: CracoAnalyzer,
     },
   ],
 }

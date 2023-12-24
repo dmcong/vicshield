@@ -23,12 +23,13 @@ function FooterSubscription() {
 
   return (
     <Row gutter={[0, 55]}>
-      <Col span={24} style={!isMobile ? { padding: '0 120px' } : {}}>
+      <Col span={24} style={{ padding: !isMobile ? '0 120px' : '0 16px' }}>
         <Brand />
         <Row
           justify={!isMobile ? 'space-between' : 'start'}
           wrap={isMobile}
           style={{ marginTop: 16 }}
+          gutter={[16, 16]}
         >
           <Col style={{ fontSize: 21 }}>
             <Typography.Text style={{ display: 'block' }}>
@@ -38,7 +39,7 @@ function FooterSubscription() {
               Available today.
             </Typography.Text>
           </Col>
-          <Col>
+          <Col span={!isMobile ? undefined : 24}>
             <Button type="primary" style={{ height: 46, padding: '0 16px' }}>
               <Typography.Text>Get Early Access</Typography.Text>
             </Button>
