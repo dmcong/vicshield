@@ -11,9 +11,10 @@ import BannerHero from './bannerHero/bannerHero'
 import CharacteristicsBanner from './characteristicsBanner/characteristicsBanner'
 import SolutionBanner from './solutionBanner/solutionBanner'
 import FeatureBanner from './featureBanner/featureBanner'
+import Footer from 'components/footer'
+import Pricing from 'view/pricing'
 
 import './index.less'
-import Footer from 'components/footer'
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>()
@@ -81,6 +82,10 @@ const App: React.FC = () => {
                     <Route path="/test-page" element={<>Test</>} />
                     <Route path="/*" element={<Home />} />
                   </Routes>
+                </Col>
+
+                <Col span={24}>
+                  <Pricing />
                 </Col>
 
                 <Col span={24}>

@@ -1,0 +1,57 @@
+.pricing-section {
+  .ant-card {
+    overflow: hidden;
+    position: relative;
+    background: #191919;
+    border: none;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 100px;
+      background: #313743;
+      transform: rotate(11.971deg);
+      top: -70px;
+      left: 30px;
+    }
+
+    &-body {
+      padding: 0;
+      height: 100%;
+
+      .btn-get-started {
+        height: 47px;
+        font-weight: 500;
+        border-radius: 0;
+        border: none;
+        color: white !important;
+
+        &:hover {
+          color: #ebebeb !important;
+        }
+
+        &-1 {
+          background: #38b2ac;
+          &:hover {
+            background: darken(#38b2ac, 10%);
+          }
+        }
+
+        &-2 {
+          background: #0a8fdc;
+          &:hover {
+            background: darken(#0a8fdc, 10%);
+          }
+        }
+
+        &-3 {
+          background: #b745ff;
+          &:hover {
+            background: darken(#b745ff, 10%);
+          }
+        }
+      }
+    }
+  }
+}
