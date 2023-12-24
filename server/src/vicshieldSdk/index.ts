@@ -5,6 +5,7 @@ import {
   getBytes,
   toBeHex,
 } from 'ethers'
+
 import { VIC_SHIELD_ABI } from './VicContractFactory'
 import * as web3 from 'web3'
 import * as ethUtil from 'ethereumjs-util'

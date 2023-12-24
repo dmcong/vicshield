@@ -1,49 +1,24 @@
 import { Types } from 'mongoose'
 import { Type } from 'class-transformer'
-import {
-  IsString,
-  IsNumber,
-  IsMongoId,
-  IsOptional,
-  IsDate,
-  IsBoolean,
-  ValidateNested,
-} from 'class-validator'
-
-import { ISignature } from 'src/types/contract.type'
+import { IsString, IsMongoId, IsDate } from 'class-validator'
 
 export class CreateContractDto {
   @IsMongoId()
   categoryId: Types.ObjectId | string
 
-  @Type(() => SignatureDto)
-  @ValidateNested()
-  signatures: SignatureDto[]
+  @IsString({ each: true })
+  signatories: string[]
 
   @IsString()
   content: string
 
-  @Type(() => Number)
-  @IsNumber()
-  value: number
-
-  @IsOptional()
   @IsString()
-  recipient?: string
+  value: string
+
+  @IsString()
+  recipient: string
 
   @Type(() => Date)
   @IsDate()
-  expiredDate?: Date
-}
-
-class SignatureDto {
-  userId: Types.ObjectId | string
-
-  @Type(() => Date)
-  @IsOptional()
-  @IsDate()
-  timestamp?: Date
-
-  @IsBoolean()
-  hasSigned: boolean
+  expirationDate: Date
 }

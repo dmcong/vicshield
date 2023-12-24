@@ -21,7 +21,7 @@ const parseBearerToken = (authorization?: string): string | undefined => {
 }
 
 @Injectable()
-export class HttpAuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
     private readonly userService: UserService,
