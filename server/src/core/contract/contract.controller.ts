@@ -5,6 +5,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common'
@@ -16,6 +17,7 @@ import { AuthGuard } from 'src/shared/guards/auth.guard'
 import { AuthContext } from 'src/types/auth-context.type'
 import { FindContractByContentDto } from './dto/find-contract-by-content.dto'
 import { FindContractByIdDto } from './dto/find-contract-by-id.dto'
+import { FindListContractDto } from './dto/find-list-contract.dto'
 
 @Controller('/contract')
 @ApiTags('contract')
@@ -41,8 +43,24 @@ export class ContractController {
     return this.contractService.findByContent(content)
   }
 
+  @Get()
+  async findMine(
+    @Req() { user }: AuthContext<Request>,
+    @Query() dto: FindListContractDto,
+  ) {
+    return this.contractService.findMine(user.wallet, dto)
+  }
+
   @Get('/:contractId')
   async findById(@Param() { contractId }: FindContractByIdDto) {
     return this.contractService.findById(contractId)
+  }
+
+  @Post('/:contractId/sign')
+  async sign(
+    @Req() { user }: AuthContext<Request>,
+    @Param() { contractId }: FindContractByIdDto,
+  ) {
+    return this.contractService.sign(contractId, user.wallet)
   }
 }

@@ -5,13 +5,15 @@ export interface IContract {
 
   categoryId: Types.ObjectId | string
 
+  owner: string
+
   signatories: ISignatory[]
 
   content: string
 
   value: string
 
-  recipient?: string
+  recipient: string
 
   expirationDate: Date
 
