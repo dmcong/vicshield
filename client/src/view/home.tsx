@@ -4,15 +4,14 @@ import { ContainerOutlined } from '@ant-design/icons'
 import Card from 'antd/lib/card/Card'
 import SubBanner from './subBanner'
 import { useSelector } from 'react-redux'
-import { AppState } from 'store'
 
 const Home = () => {
-  const contracts = useSelector((state: AppState) => state.contracts)
-  const signers = useSelector((state: AppState) => state.signers)
-
-  const approved = Object.values(contracts).filter(
-    (e) => e.totalSigned.toString() === e.totalSigner.toString(),
-  )
+  // const contracts = useSelector((state: AppState) => state.contracts)
+  // const signers = useSelector((state: AppState) => state.signers)
+  //
+  // const approved = Object.values(contracts).filter(
+  //   (e) => e.totalSigned.toString() === e.totalSigner.toString(),
+  // )
 
   return (
     <Row>
@@ -42,7 +41,8 @@ const Home = () => {
                     Total Contract
                   </Typography.Title>
                 }
-                value={10212 + Object.keys(contracts).length}
+                // value={10212 + Object.keys(contracts).length}
+                value={10212}
                 prefix={<ContainerOutlined />}
               />
             </Col>
@@ -59,7 +59,8 @@ const Home = () => {
                     Total Approved
                   </Typography.Title>
                 }
-                value={7281 + approved.length}
+                // value={7281 + approved.length}
+                value={7281}
               />
             </Col>
             <Col
@@ -77,7 +78,8 @@ const Home = () => {
                     Total Signature
                   </Typography.Title>
                 }
-                value={12721 + Object.keys(signers).length}
+                // value={12721 + Object.keys(signers).length}
+                value={12721}
               />
             </Col>
           </Row>

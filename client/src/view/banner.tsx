@@ -1,7 +1,6 @@
 import { Row, Col, Space } from 'antd'
 
 import UploadBackground from 'static/images/upload.png'
-import MenuHeader from 'components/header'
 import ButtonUploadFile from 'components/buttonUpload'
 
 const Banner = () => {
@@ -18,9 +17,6 @@ const Banner = () => {
             padding: '8px 100px',
           }}
         >
-          <Col span={24}>
-            <MenuHeader />
-          </Col>
           <Col span={24} style={{ marginTop: 120, textAlign: 'center' }}>
             <Space style={{ fontSize: 45, fontWeight: 200 }}>
               <span className="title-word title-word-1">Protect</span>

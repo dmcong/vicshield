@@ -1,9 +1,10 @@
-import { useSignerMetaData } from 'hooks/useSigners'
+// import { useSignerMetaData } from 'hooks/useSigners'
 
 const SignerEmail = ({ uid }: { uid: number }) => {
-  const user = useSignerMetaData(uid)
-  if (!user?.email) return <span>--</span>
-  return <span>{user?.email}</span>
+  // const user = useSignerMetaData(uid)
+  // if (!user?.email) return <span>--</span>
+  // return <span>{user?.email}</span>
+  return <></>
 }
 
 export default SignerEmail

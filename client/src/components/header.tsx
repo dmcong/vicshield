@@ -1,5 +1,4 @@
 import { ContactsOutlined, HomeOutlined } from '@ant-design/icons'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 import { Menu, MenuProps, Row, Col, Space, Typography } from 'antd'
 import { Link } from 'react-router-dom'
@@ -41,7 +40,6 @@ function MenuHeader() {
             style={{ border: 'none', minWidth: 280 }}
             defaultSelectedKeys={['home']}
           />
-          <WalletMultiButton style={{ background: '#ffab40' }} />
         </Space>
       </Col>
     </Row>
