@@ -10,6 +10,11 @@ const configuration = () => ({
   mongodb: {
     uri: env.MONGO_URI,
   },
+  jwt: {
+    secret: env.JWT_SECRET,
+    ttl: env.JWT_TTL,
+  },
+  net: env.NET,
 })
 
 export type EnvironmentVariables = ReturnType<typeof configuration>

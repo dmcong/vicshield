@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common'
+import { Global, Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
+import { JwtModule } from '@nestjs/jwt'
 
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -8,6 +9,27 @@ import { AppService } from './app.service'
 import configuration, { EnvironmentVariables } from 'src/configs'
 import { ContractModule } from './contract/contract.module'
 import { UserModule } from './user/user.module'
+
+@Global()
+@Module({
+  imports: [
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (
+        configService: ConfigService<EnvironmentVariables>,
+      ) => {
+        return {
+          global: true,
+          secret: configService.get('jwt').secret,
+          signOptions: { expiresIn: configService.get('jwt').ttl },
+        }
+      },
+      inject: [ConfigService],
+    }),
+  ],
+  exports: [JwtModule],
+})
+export class GlobalModule {}
 
 @Module({
   imports: [
@@ -25,6 +47,7 @@ import { UserModule } from './user/user.module'
     }),
     ContractModule,
     UserModule,
+    GlobalModule,
   ],
   controllers: [AppController],
   providers: [AppService],

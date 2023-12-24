@@ -5,19 +5,21 @@ export interface IContract {
 
   categoryId: Types.ObjectId | string
 
-  signatures: ISignature[]
+  signatories: ISignatory[]
 
   content: string
 
-  value: number
+  value: string
 
   recipient?: string
 
-  expiredDate?: Date
+  expirationDate: Date
+
+  contractExpirationDate?: Date
 }
 
-export type ISignature = {
-  userId: Types.ObjectId | string
+export class ISignatory {
+  wallet: string
 
   timestamp?: Date
 
