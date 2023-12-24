@@ -1,8 +1,10 @@
 import { Row, Col, Typography, Button, Image, Divider } from 'antd'
 import { COLORS } from '../../themes/colors'
 import React from 'react'
-import images from '../../assets/images'
+import images from '../../static/images'
 import { Styles } from '../../type/styles.type'
+import { useAppSelector } from '../../store/rootStore'
+import { selectIsMobile } from '../../store/common/common.slice'
 
 type TBanner = {
   title: string
@@ -11,10 +13,10 @@ type TBanner = {
 
 const BannerHero = (props: TBanner) => {
   const { title, content } = props
-
+  const isMobile = useAppSelector(selectIsMobile)
   return (
-    <Row justify="center" style={styles.container}>
-      <Col span={16}>
+    <Row justify={!isMobile ? 'center' : undefined} style={styles.container}>
+      <Col span={isMobile ? 24 : 16}>
         <Col>
           <Typography.Title style={styles.title}>{title}</Typography.Title>
         </Col>
@@ -24,26 +26,26 @@ const BannerHero = (props: TBanner) => {
         </Col>
         <Divider className={'borderNone'} />
         <Col>
-          <Button style={styles.button}>
+          <Button
+            style={{ ...styles.button, width: isMobile ? '100%' : 'auto' }}
+          >
             <Typography.Text style={styles.buttonText}>
               Launch now
             </Typography.Text>
           </Button>
         </Col>
       </Col>
-      <Col span={8}>
-        <Image preview={false} src={images['hero']} />
-      </Col>
+      {!isMobile && (
+        <Col span={8}>
+          <Image preview={false} src={images['hero']} />
+        </Col>
+      )}
     </Row>
   )
 }
 
 const styles: Styles = {
-  container: {
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    padding: '8px 100px',
-  },
+  container: {},
   content: {
     fontSize: 18,
     fontWeight: '400',

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import type { MenuProps } from 'antd'
-import { Col, Drawer, Layout, Menu, Row } from 'antd'
+import { Col, Drawer, Menu, Row } from 'antd'
 import { COLORS } from '../themes/colors'
 import VictionIcon from '../victionIcon'
 import { MenuOutlined } from '@ant-design/icons'
 import { Styles } from '../type/styles.type'
 import BtnConnectWallet from 'components/base-btn/BtnConnectWallet'
+import { useAppSelector } from '../store/rootStore'
+import { selectIsMobile } from '../store/common/common.slice'
 
 const items: MenuProps['items'] = [
   {
@@ -33,11 +35,10 @@ const items: MenuProps['items'] = [
 const styles: Styles = {
   container: {
     backgroundColor: COLORS.MENU_BACKGROUND,
-    width: '90%',
+    width: '80%',
     borderRadius: 99,
     paddingLeft: 10,
     paddingRight: 10,
-    alignSelf: 'center',
   },
   menu: {
     borderWidth: 0,
@@ -56,6 +57,7 @@ const styles: Styles = {
 const TopMenu = () => {
   const [current, setCurrent] = useState('mail')
   const [open, setOpen] = useState(false)
+  const isMobile = useAppSelector(selectIsMobile)
   const showDrawer = () => {
     setOpen(true)
   }
@@ -70,41 +72,46 @@ const TopMenu = () => {
 
   const renderHamburger = () => {
     return (
-      <Layout
+      <Row
         className={'hamburgerMenu'}
         style={{
-          paddingLeft: 20,
-          width: 100,
-          height: 100,
+          width: '100%',
+          backgroundColor: 'transparent',
         }}
       >
-        <MenuOutlined
-          style={{ height: 100, width: 100, fontSize: 20 }}
-          onClick={showDrawer}
-        />
-        <Drawer width={250} closable={false} onClose={onClose} open={open}>
-          <VictionIcon />
-          <Menu
-            onClick={onClick}
-            style={styles.menu}
-            selectedKeys={[current]}
-            mode={'inline'}
-            items={items}
-          />
-          <BtnConnectWallet />
-        </Drawer>
-      </Layout>
+        <Row align={'middle'} style={{ flex: 1 }}>
+          <Col flex={5}>
+            <VictionIcon />
+          </Col>
+          <Col flex={0.5}>
+            <BtnConnectWallet />
+          </Col>
+          <Col flex={0.5}>
+            <MenuOutlined
+              style={{ height: 32, width: 32, fontSize: 20 }}
+              onClick={showDrawer}
+            />
+            <Drawer width={250} closable={false} onClose={onClose} open={open}>
+              <Menu
+                onClick={onClick}
+                style={styles.menu}
+                selectedKeys={[current]}
+                mode={'inline'}
+                items={items}
+              />
+            </Drawer>
+          </Col>
+        </Row>
+      </Row>
     )
   }
 
   return (
     <>
-      <Layout className={'menu'} style={styles.container}>
-        <Row align={'middle'}>
-          <Col flex={1}>
+      {!isMobile ? (
+        <Row className={'menu'} style={styles.container}>
+          <Row justify={'space-between'} align={'middle'} style={{ flex: 1 }}>
             <VictionIcon />
-          </Col>
-          <Col flex={5}>
             <Menu
               onClick={onClick}
               style={styles.menu}
@@ -112,13 +119,12 @@ const TopMenu = () => {
               mode="horizontal"
               items={items}
             />
-          </Col>
-          <Col flex={0}>
             <BtnConnectWallet />
-          </Col>
+          </Row>
         </Row>
-      </Layout>
-      {renderHamburger()}
+      ) : (
+        renderHamburger()
+      )}
     </>
   )
 }

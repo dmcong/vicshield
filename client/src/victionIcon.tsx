@@ -1,7 +1,8 @@
 import React from 'react'
-import { Image, Layout, Typography } from 'antd'
-import images from './assets/images'
+import { Col, Image, Row, Typography } from 'antd'
+import images from './static/images'
 import { Styles } from './type/styles.type'
+import { useNavigate } from 'react-router-dom'
 
 const styles: Styles = {
   layout: {
@@ -14,11 +15,23 @@ const styles: Styles = {
   },
 }
 const VictionIcon = () => {
+  const navigate = useNavigate()
+  const handleNavigateHome = () => {
+    navigate('/')
+  }
   return (
-    <Layout style={styles.layout}>
-      <Image width={51.94} src={images['viction']} preview={false} />
-      <Typography.Text style={styles.vicShield}>VicShield</Typography.Text>
-    </Layout>
+    <Row
+      onClick={handleNavigateHome}
+      style={{ cursor: 'pointer' }}
+      align={'middle'}
+    >
+      <Col>
+        <Image width={51.94} src={images['viction']} preview={false} />
+      </Col>
+      <Col>
+        <Typography.Text style={styles.vicShield}>VicShield</Typography.Text>
+      </Col>
+    </Row>
   )
 }
 

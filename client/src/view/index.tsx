@@ -1,22 +1,36 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { Col, Divider, Layout, Row } from 'antd'
 import { Content, Footer } from 'antd/lib/layout/layout'
-import Management from './management'
 import Home from './home'
-import ContractDetail from './contractDetail'
-import { useDispatch } from 'react-redux'
 import UILoader from 'uiloader'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import TopMenu from '../components/topMenu'
 import BannerHero from './bannerHero/bannerHero'
 import CharacteristicsBanner from './characteristicsBanner/characteristicsBanner'
+import { useAppDispatch } from '../store/rootStore'
+import { setIsMobile } from '../store/common/common.slice'
+import SolutionBanner from './solutionBanner/solutionBanner'
+import FeatureBanner from './featureBanner/featureBanner'
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>()
-  const [loading, setLoading] = useState(true)
+  const dispatch = useAppDispatch()
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 900) {
+      dispatch(setIsMobile(true))
+    } else {
+      dispatch(setIsMobile(false))
+    }
+  }
+
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+  })
 
   useEffect(function () {
     Aos.init({ duration: 1000 })
@@ -35,8 +49,11 @@ const App: React.FC = () => {
 
   return (
     <UILoader>
-      <Layout>
-        <TopMenu />
+      <Layout style={{ padding: '0 20px' }}>
+        <Divider style={{ borderWidth: 0 }} />
+        <Row justify={'center'}>
+          <TopMenu />
+        </Row>
         <Divider style={{ borderWidth: 0 }} />
         <Content>
           <Row justify="center">
@@ -49,18 +66,29 @@ const App: React.FC = () => {
                 }
               />
             </Col>
-
+            <Divider style={{ borderWidth: 0 }} />
+            <Divider style={{ borderWidth: 0 }} />
             <Col span={24}>
               <CharacteristicsBanner />
             </Col>
 
+            <Divider style={{ borderWidth: 0 }} />
+            <Divider style={{ borderWidth: 0 }} />
+
+            <Col span={24}>
+              <SolutionBanner />
+            </Col>
+
+            <Divider style={{ borderWidth: 0 }} />
+            <Divider style={{ borderWidth: 0 }} />
+            <Col span={24}>
+              <FeatureBanner />
+            </Col>
             <Col span={24} style={{ minHeight: 350 }}>
               <Routes>
                 <Route path="/home" element={<Home />} />
-
                 <Route path="/contract/:hash" element={<>/contract/:hash</>} />
                 <Route path="/management" element={<>management</>} />
-
                 <Route path="/*" element={<Home />} />
               </Routes>
             </Col>

@@ -1,8 +1,9 @@
-import { Row, Col, Typography, Divider, Carousel, Card, Layout } from 'antd'
+import { Row, Col, Typography, Divider, Card } from 'antd'
 import { COLORS } from '../../themes/colors'
 import React from 'react'
 import { Styles } from '../../type/styles.type'
-import { Content } from 'antd/lib/layout/layout'
+import { Image } from 'antd/es'
+import images from '../../static/images'
 
 interface ItemCharacteristics {
   key: number
@@ -13,89 +14,84 @@ interface ItemCharacteristics {
 const items: ItemCharacteristics[] = [
   {
     key: 1,
-    image: '',
+    image: images['rubic1'],
     content: 'Gasless Approval Thanks to VRC25',
   },
   {
     key: 2,
-    image: '',
-    content: 'Gasless Approval Thanks to VRC25',
+    image: images['rubic2'],
+    content: 'Streamline OperationManagement',
   },
   {
     key: 3,
-    image: '',
-    content: 'Gasless Approval Thanks to VRC25',
+    image: images['rubic3'],
+    content: 'Non-OperationManagement',
   },
   {
     key: 4,
-    image: '',
-    content: 'Gasless Approval Thanks to VRC25',
-  },
-  {
-    key: 5,
-    image: '',
-    content: 'Gasless Approval Thanks to VRC25',
-  },
-  {
-    key: 6,
-    image: '',
-    content: 'Gasless Approval Thanks to VRC25',
+    image: images['rubic4'],
+    content: 'Data Availability for insightful decision-making',
   },
 ]
 
-const contentStyle: React.CSSProperties = {
-  height: '160px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#364d79',
-}
 const CharacteristicsBanner = () => {
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide)
-  }
-
   const renderItems = () => {
     return items.map((item: ItemCharacteristics, index) => {
       return (
-        <Card style={{ width: 300, backgroundColor: 'rgba(74, 146, 254, 1)' }}>
-          <p>{item.content}</p>
-        </Card>
+        <Col span={5} key={index}>
+          <Card
+            style={{
+              height: 272,
+              backgroundColor: COLORS.CARD,
+              borderRadius: 32,
+              borderColor: COLORS.BORDER_CARD,
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <div
+              style={{
+                alignItems: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                marginTop: 20,
+                marginBottom: 20,
+              }}
+            >
+              <div>
+                <Image src={item.image} preview={false} />
+              </div>
+            </div>
+            <p style={styles.cardText}>{item.content}</p>
+          </Card>
+        </Col>
       )
     })
   }
   return (
-    <Col span={24}>
-      <Row justify={'center'}>
-        <Col span={16}>
-          <Col>
-            <Typography.Title style={styles.title}>
-              Characteristics
-            </Typography.Title>
+    <>
+      <Col span={24}>
+        <Row justify={'center'}>
+          <Col span={16}>
+            <Col>
+              <Typography.Title style={styles.title}>
+                Characteristics
+              </Typography.Title>
+            </Col>
+            <Col>
+              <p style={styles.content}>
+                Seamless integrations across EVM and non-EVM chains, fortified
+                by cutting-edge MPC-TSS and ZK innovations.
+              </p>
+            </Col>
           </Col>
-          <Col>
-            <p style={styles.content}>
-              Seamless integrations across EVM and non-EVM chains, fortified by
-              cutting-edge MPC-TSS and ZK innovations.
-            </p>
-          </Col>
-        </Col>
-        <Row>
-          <Card style={{ backgroundColor: 'rgba(74, 146, 254, 1)' }}>
-            <p>Gasless Approval Thanks to VRC25</p>
-          </Card>
-          <Card style={{ backgroundColor: 'rgba(74, 146, 254, 1)' }}>
-            <p>Gasless Approval Thanks to VRC25</p>
-          </Card>
-          <Card style={{ backgroundColor: 'rgba(74, 146, 254, 1)' }}>
-            <p>Gasless Approval Thanks to VRC25</p>
-          </Card>
-          <Card style={{ backgroundColor: 'rgba(74, 146, 254, 1)' }}>
-            <p>Gasless Approval Thanks to VRC25</p>
-          </Card>
         </Row>
-      </Row>
-    </Col>
+        <Divider style={{ borderWidth: 0 }} />
+        <Row justify={'center'} style={{ gap: 20 }}>
+          {renderItems()}
+        </Row>
+      </Col>
+    </>
   )
 }
 
@@ -126,6 +122,9 @@ const styles: Styles = {
     fontSize: 16,
     fontWeight: '700',
     color: COLORS.WHITE,
+  },
+  cardText: {
+    textAlign: 'center',
   },
 }
 
