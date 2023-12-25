@@ -15,6 +15,7 @@ import Footer from 'components/footer'
 import Pricing from 'view/pricing'
 
 import './index.less'
+import RoadMap from './roadMap/roadMap'
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>()
@@ -70,6 +71,10 @@ const App: React.FC = () => {
 
                 <Col span={24}>
                   <FeatureBanner />
+                </Col>
+
+                <Col span={24}>
+                  <RoadMap />
                 </Col>
                 <Col span={24} style={{ minHeight: 350 }}>
                   <Routes>

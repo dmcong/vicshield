@@ -4,6 +4,8 @@ import React from 'react'
 import { Styles } from '../../type/styles.type'
 import { Image } from 'antd/es'
 import images from '../../static/images'
+import useIsMobile from '../../hooks/system/useIsMobile'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 interface ItemCharacteristics {
   key: number
@@ -35,10 +37,12 @@ const items: ItemCharacteristics[] = [
 ]
 
 const CharacteristicsBanner = () => {
+  const isMobile = useIsMobile()
+
   const renderItems = () => {
     return items.map((item: ItemCharacteristics, index) => {
       return (
-        <Col span={5} key={index}>
+        <SwiperSlide key={index}>
           <Card
             style={{
               height: 272,
@@ -64,7 +68,7 @@ const CharacteristicsBanner = () => {
             </div>
             <p style={styles.cardText}>{item.content}</p>
           </Card>
-        </Col>
+        </SwiperSlide>
       )
     })
   }
@@ -87,10 +91,14 @@ const CharacteristicsBanner = () => {
           </Col>
         </Row>
         <Divider style={{ borderWidth: 0 }} />
-        <Row justify={'center'} style={{ gap: 20 }}>
-          {renderItems()}
-        </Row>
       </Col>
+      <Swiper
+        draggable={isMobile}
+        spaceBetween={20}
+        slidesPerView={isMobile ? 2.5 : 4}
+      >
+        {renderItems()}
+      </Swiper>
     </>
   )
 }
