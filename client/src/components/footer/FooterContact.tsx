@@ -100,19 +100,19 @@ function FooterContact() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }
-            : {}
+            : { display: 'flex', justifyContent: 'center' }
         }
       >
         {!isMobile && <span />}
 
         <Space
-          size={29}
+          size={20}
           style={{
             fontSize: 29,
             color: '#96989B',
             background: '#2B3137',
             borderRadius: 50,
-            padding: '10px 29px',
+            padding: '8px 20px',
           }}
         >
           <GithubIcon size={29} />

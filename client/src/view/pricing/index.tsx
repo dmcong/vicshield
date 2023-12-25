@@ -26,7 +26,7 @@ function Pricing() {
           <Col>
             <Typography.Title
               className="text-center"
-              style={{ fontSize: 52, width: 763 }}
+              style={{ fontSize: 52, width: !isMobile ? 763 : '100%' }}
             >
               Simple, transparent & great pricing.
             </Typography.Title>
@@ -35,7 +35,11 @@ function Pricing() {
           <Col>
             <Typography.Text
               className="text-center"
-              style={{ fontSize: 18, width: 763 }}
+              style={{
+                display: 'block',
+                fontSize: 18,
+                width: !isMobile ? 763 : '100%',
+              }}
             >
               We have all kind of plans for every business that fit with your
               needs
@@ -44,7 +48,7 @@ function Pricing() {
         </Row>
       </Col>
 
-      <Col span={24} style={{ padding: ' 0 60px' }}>
+      <Col span={24} style={{ padding: !isMobile ? ' 0 60px' : 0 }}>
         <Row gutter={!isMobile ? 16 : [0, 16]}>
           {PRICE_PACKAGES.map(({ id, title, features, pricing }) => {
             return (
