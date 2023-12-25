@@ -3,13 +3,18 @@ import { BadRequestException, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 
 import { ContractDocument, ContractModel } from './contract.entity'
-import { Model, Types } from 'mongoose'
+import { FilterQuery, Model, Types } from 'mongoose'
 import { CreateContractDto } from './dto/create-contract.dto'
 import VicShieldSdk from 'src/vicshieldSdk'
 import { ConfigService } from '@nestjs/config'
 import { EnvironmentVariables } from 'src/configs'
 import { UserService } from '../user/user.service'
 import { ISignatory } from 'src/types/contract.type'
+import { FindListContractDto } from './dto/find-list-contract.dto'
+import {
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
+} from 'src/shared/constants/pagination.const'
 
 @Injectable()
 export class ContractService {
@@ -60,7 +65,47 @@ export class ContractService {
     return this.contractModel.findById(contractId)
   }
 
+  async findMine(
+    wallet: string,
+    {
+      page = DEFAULT_PAGE,
+      limit = DEFAULT_PAGE_SIZE,
+      categoryId,
+    }: FindListContractDto,
+  ) {
+    const filter: FilterQuery<ContractModel> = {
+      $or: [{ owner: wallet }, { signatories: wallet }],
+      active: true,
+    }
+    if (categoryId) {
+      filter.categoryId = categoryId
+    }
+
+    const [data, total] = await Promise.all([
+      this.contractModel
+        .find(filter)
+        .skip(page * limit)
+        .limit(limit),
+      this.contractModel.countDocuments(filter),
+    ])
+
+    return { data, total }
+  }
+
   async active(contractId: string | Types.ObjectId) {
     return this.contractModel.findByIdAndUpdate(contractId, { active: true })
+  }
+
+  async sign(contractId: string | Types.ObjectId, wallet: string) {
+    const contract = await this.contractModel.findById(contractId)
+    if (!contract) throw new BadRequestException()
+
+    const signatories = [...contract.signatories]
+    contract.signatories = signatories.map((signatory) => {
+      if (signatory.wallet === wallet) return { ...signatory, hasSigned: true }
+
+      return signatory
+    })
+    return contract.save()
   }
 }
