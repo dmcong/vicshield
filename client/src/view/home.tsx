@@ -9,6 +9,7 @@ import CharacteristicsBanner from './characteristicsBanner/characteristicsBanner
 import SolutionBanner from './solutionBanner/solutionBanner'
 import FeatureBanner from './featureBanner/featureBanner'
 import Pricing from './pricing'
+import RoadMap from './roadMap/roadMap'
 
 const Home = () => {
   return (
@@ -35,6 +36,9 @@ const Home = () => {
         <FeatureBanner />
       </Col>
 
+      <Col span={24}>
+        <RoadMap />
+      </Col>
       <Col span={24}>
         <Pricing />
       </Col>

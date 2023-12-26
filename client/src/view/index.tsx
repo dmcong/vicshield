@@ -18,6 +18,7 @@ import './index.less'
 import CreateContract from './createContract'
 import ContractsProvider from 'providers/contract.provider'
 import RoadMap from './roadMap/roadMap'
+import ContractManagement from './contractManagement/contractManagement'
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>()
@@ -56,7 +57,6 @@ const App: React.FC = () => {
                 <Col span={24} style={{ minHeight: 350 }}>
                   <Routes>
                     <Route path="/home" element={<Home />} />
-
                     <Route
                       path="/create-contract"
                       element={
@@ -75,7 +75,7 @@ const App: React.FC = () => {
                       path="/management"
                       element={
                         <ContractsProvider>
-                          Contract management
+                          <ContractManagement />
                         </ContractsProvider>
                       }
                     />
