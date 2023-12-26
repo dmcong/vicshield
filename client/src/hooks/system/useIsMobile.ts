@@ -8,9 +8,7 @@ const useIsMobile = () => {
   if (lg === undefined || xl === undefined || xxl === undefined)
     return undefined
 
-  if (lg !== false || xl !== false || xxl !== false) return false
-
-  return true
+  return !(lg || xl || xxl)
 }
 
 export default useIsMobile

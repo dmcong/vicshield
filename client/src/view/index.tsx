@@ -17,6 +17,7 @@ import Pricing from 'view/pricing'
 import './index.less'
 import CreateContract from './createContract'
 import ContractsProvider from 'providers/contract.provider'
+import RoadMap from './roadMap/roadMap'
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>()
