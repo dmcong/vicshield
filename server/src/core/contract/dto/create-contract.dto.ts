@@ -3,6 +3,9 @@ import { IsString, IsDate, IsOptional } from 'class-validator'
 
 export class CreateContractDto {
   @IsString()
+  title: string
+
+  @IsString()
   categoryId: string
 
   @IsString({ each: true })

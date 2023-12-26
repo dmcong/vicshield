@@ -14,3 +14,11 @@ export enum STATUS {
   WAITING = 2,
   EXPIRE = 3,
 }
+
+export type CreateContractDto = {
+  content: string
+  signatories: string[]
+  value?: string
+  recipient?: string
+  title: string
+}

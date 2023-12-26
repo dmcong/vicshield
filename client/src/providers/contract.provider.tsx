@@ -10,6 +10,7 @@ import produce from 'immer'
 import { IContract } from './contract.type'
 import axios from 'axios'
 import { useWalletClient } from 'wagmi'
+import { CreateContractDto } from 'type/contract.type'
 
 type MetaProposalMethods = {
   upsetContracts: (metaProposals: IContract[]) => void
@@ -59,10 +60,11 @@ const ContractsProvider = ({ children }: PropsWithChildren) => {
   const fetchContracts = useCallback(async () => {
     try {
       setLoading(true)
-      const res = await apiContracts.get<any[]>(
-        '/contract?owner=' + data?.account.address,
-      )
-      upset(res.data)
+      const { data: contractRes } = await apiContracts.get<{
+        data: IContract[]
+        total: number
+      }>('/contract?owner=' + data?.account.address)
+      upset(contractRes.data)
     } catch (error) {
       console.error('error', error)
     } finally {
@@ -105,12 +107,7 @@ export const useContractMutation = () => {
   )
 
   const onCreateContract = useCallback(
-    async (payload: {
-      content: string
-      signatories: string[]
-      value?: string
-      recipient?: string
-    }) => {
+    async (payload: CreateContractDto) => {
       const res = await apiContracts.post<any>(`/contract`, payload)
       await onFetch(res.data._id)
       return res
