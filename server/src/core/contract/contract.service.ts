@@ -44,6 +44,7 @@ export class ContractService {
 
     const res = await this.contractModel.create({
       ...dto,
+      owner: wallet,
       signatories: dto.signatories.map<ISignatory>((signatory) => ({
         wallet: signatory,
         hasSigned: false,
