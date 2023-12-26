@@ -49,10 +49,12 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request: AuthContext<Request> = context.switchToHttp().getRequest()
 
-    const authorization = request.headers?.authorization
+    const wallet = request.headers.wallet || ''
+    // const authorization = request.headers?.authorization
 
-    const { valid, user } = await this.validate(authorization)
-    request.user = user
-    return valid
+    request.user = {
+      wallet,
+    } as any
+    return true
   }
 }

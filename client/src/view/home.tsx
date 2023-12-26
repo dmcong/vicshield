@@ -4,94 +4,39 @@ import { ContainerOutlined } from '@ant-design/icons'
 import Card from 'antd/lib/card/Card'
 import SubBanner from './subBanner'
 import { useSelector } from 'react-redux'
+import BannerHero from './bannerHero/bannerHero'
+import CharacteristicsBanner from './characteristicsBanner/characteristicsBanner'
+import SolutionBanner from './solutionBanner/solutionBanner'
+import FeatureBanner from './featureBanner/featureBanner'
+import Pricing from './pricing'
 
 const Home = () => {
-  // const contracts = useSelector((state: AppState) => state.contracts)
-  // const signers = useSelector((state: AppState) => state.signers)
-  //
-  // const approved = Object.values(contracts).filter(
-  //   (e) => e.totalSigned.toString() === e.totalSigner.toString(),
-  // )
-
   return (
-    <Row>
+    <Row justify="center" gutter={[0, 64]}>
       <Col span={24}>
-        <Card
-          bordered={false}
-          style={{ background: 'transparent' }}
-          bodyStyle={{ padding: 24 }}
-        >
-          <Row
-            gutter={[16, 16]}
-            justify="center"
-            style={{ textAlign: 'center' }}
-          >
-            <Col
-              xl={6}
-              md={8}
-              xs={24}
-              data-aos="fade-right"
-              data-aos-offset="300"
-              data-aos-delay="250"
-              data-aos-easing="ease-in-sine"
-            >
-              <Statistic
-                title={
-                  <Typography.Title level={2} style={{ color: '#ffab40' }}>
-                    Total Contract
-                  </Typography.Title>
-                }
-                // value={10212 + Object.keys(contracts).length}
-                value={10212}
-                prefix={<ContainerOutlined />}
-              />
-            </Col>
-            <Col
-              xl={6}
-              md={8}
-              xs={24}
-              data-aos="flip-left"
-              data-aos-delay="250"
-            >
-              <Statistic
-                title={
-                  <Typography.Title level={2} style={{ color: '#ffab40' }}>
-                    Total Approved
-                  </Typography.Title>
-                }
-                // value={7281 + approved.length}
-                value={7281}
-              />
-            </Col>
-            <Col
-              xl={6}
-              md={8}
-              xs={24}
-              data-aos="fade-left"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-sine"
-              data-aos-delay="250"
-            >
-              <Statistic
-                title={
-                  <Typography.Title level={2} style={{ color: '#ffab40' }}>
-                    Total Signature
-                  </Typography.Title>
-                }
-                // value={12721 + Object.keys(signers).length}
-                value={12721}
-              />
-            </Col>
-          </Row>
-        </Card>
+        <BannerHero
+          title={'Sign with Confidence, Transact with Transparency'}
+          content={
+            'VicShield - A next-gen digital signature and contract protection program.\n' +
+            'Digitize traditional contracts but still ensure safety and security.'
+          }
+        />
       </Col>
-      <Col
-        span={24}
-        data-aos="fade-up"
-        data-aos-anchor-placement="center-bottom"
-        data-aos-delay="500"
-      >
-        <SubBanner />
+
+      <Col span={24}>
+        <CharacteristicsBanner />
+      </Col>
+
+      <Col span={24}>
+        <SolutionBanner />
+      </Col>
+
+      <Col span={24}>
+        <FeatureBanner />
+      </Col>
+
+      <Col span={24}>
+        <Pricing />
       </Col>
     </Row>
   )

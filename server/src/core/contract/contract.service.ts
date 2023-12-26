@@ -28,17 +28,13 @@ export class ContractService {
     this.vicshieldSdk = new VicShieldSdk(config.get('net') ?? 'testnet')
   }
 
-  async create(dto: CreateContractDto, userId: string | Types.ObjectId) {
-    const existedContract = await this.findByContent(dto.content)
+  async create(dto: CreateContractDto, wallet: string) {
+    // const user = await this.userService.findById(userId)
 
-    if (existedContract) throw new BadRequestException()
-
-    const user = await this.userService.findById(userId)
-
-    if (!user) throw new BadRequestException()
+    // if (!user) throw new BadRequestException()
 
     const tx = await this.vicshieldSdk.generateCreateContractTx({
-      owner: user.wallet,
+      owner: wallet,
       base64Content: dto.content,
       signatories: dto.signatories,
       expirationDate: dto.expirationDate,
@@ -46,7 +42,7 @@ export class ContractService {
       recipient: dto.recipient,
     })
 
-    await this.contractModel.create({
+    const res = await this.contractModel.create({
       ...dto,
       signatories: dto.signatories.map<ISignatory>((signatory) => ({
         wallet: signatory,
@@ -54,7 +50,7 @@ export class ContractService {
       })),
     })
 
-    return tx
+    return { ...res.toJSON(), tx }
   }
 
   async findByContent(content: string) {
@@ -73,13 +69,14 @@ export class ContractService {
       categoryId,
     }: FindListContractDto,
   ) {
+    console.log('wallet', wallet)
     const filter: FilterQuery<ContractModel> = {
-      $or: [{ owner: wallet }, { signatories: wallet }],
-      active: true,
+      owner: wallet,
     }
     if (categoryId) {
       filter.categoryId = categoryId
     }
+    console.log('filter', filter)
 
     const [data, total] = await Promise.all([
       this.contractModel

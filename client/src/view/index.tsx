@@ -15,6 +15,8 @@ import Footer from 'components/footer'
 import Pricing from 'view/pricing'
 
 import './index.less'
+import CreateContract from './createContract'
+import ContractsProvider from 'providers/contract.provider'
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>()
@@ -50,42 +52,34 @@ const App: React.FC = () => {
           <Col span={24}>
             <Layout.Content>
               <Row justify="center" gutter={[0, 64]}>
-                <Col span={24}>
-                  <BannerHero
-                    title={'Sign with Confidence, Transact with Transparency'}
-                    content={
-                      'VicShield - A next-gen digital signature and contract protection program.\n' +
-                      'Digitize traditional contracts but still ensure safety and security.'
-                    }
-                  />
-                </Col>
-
-                <Col span={24}>
-                  <CharacteristicsBanner />
-                </Col>
-
-                <Col span={24}>
-                  <SolutionBanner />
-                </Col>
-
-                <Col span={24}>
-                  <FeatureBanner />
-                </Col>
                 <Col span={24} style={{ minHeight: 350 }}>
                   <Routes>
                     <Route path="/home" element={<Home />} />
+
+                    <Route
+                      path="/create-contract"
+                      element={
+                        <ContractsProvider>
+                          <CreateContract />
+                        </ContractsProvider>
+                      }
+                    />
                     <Route
                       path="/contract/:hash"
-                      element={<>/contract/:hash</>}
+                      element={
+                        <ContractsProvider>Contract details</ContractsProvider>
+                      }
                     />
-                    <Route path="/management" element={<>management</>} />
-                    <Route path="/test-page" element={<>Test</>} />
+                    <Route
+                      path="/management"
+                      element={
+                        <ContractsProvider>
+                          Contract management
+                        </ContractsProvider>
+                      }
+                    />
                     <Route path="/*" element={<Home />} />
                   </Routes>
-                </Col>
-
-                <Col span={24}>
-                  <Pricing />
                 </Col>
 
                 <Col span={24}>

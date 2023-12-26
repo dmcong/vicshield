@@ -30,7 +30,7 @@ export class ContractController {
     @Body() dto: CreateContractDto,
     @Req() { user }: AuthContext<Request>,
   ) {
-    return this.contractService.create(dto, user._id)
+    return this.contractService.create(dto, user.wallet)
   }
 
   @Post('/:contractId/active')

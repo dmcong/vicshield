@@ -5,6 +5,7 @@ import images from '../../static/images'
 import { Styles } from '../../type/styles.type'
 import Spline from '@splinetool/react-spline'
 import useIsMobile from 'hooks/system/useIsMobile'
+import { useNavigate } from 'react-router-dom'
 
 type TBanner = {
   title: string
@@ -14,6 +15,8 @@ type TBanner = {
 const BannerHero = (props: TBanner) => {
   const { title, content } = props
   const isMobile = useIsMobile()
+  const navigate = useNavigate()
+
   return (
     <Row justify={!isMobile ? 'center' : undefined} style={styles.container}>
       <Col span={isMobile ? 24 : 16}>
@@ -28,6 +31,7 @@ const BannerHero = (props: TBanner) => {
         <Col>
           <Button
             style={{ ...styles.button, width: isMobile ? '100%' : 'auto' }}
+            onClick={() => navigate('/create-contract')}
           >
             <Typography.Text style={styles.buttonText}>
               Launch now

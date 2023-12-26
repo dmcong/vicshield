@@ -6,7 +6,11 @@ import { Button, Upload } from 'antd'
 import { RcFile } from 'antd/lib/upload'
 import { asyncWait, hashMd5, MetadataService } from 'utils'
 
-const ButtonUploadFile = () => {
+const ButtonUploadFile = ({
+  onChange,
+}: {
+  onChange: (val: string) => void
+}) => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
 
@@ -15,11 +19,7 @@ const ButtonUploadFile = () => {
       let reader = new FileReader()
       reader.readAsDataURL(selectedFile)
       reader.onloadend = async (e: any) => {
-        console.log('e.target.result', e.target.result)
-        const hash = hashMd5(e.target.result)
-        console.log('hash', hash)
-        await MetadataService.backupFile(hash, e.target.result)
-        navigate(`contract/${hash}`)
+        onChange(e.target.result)
       }
     }
   }

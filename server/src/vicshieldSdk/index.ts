@@ -55,9 +55,9 @@ export default class VicShieldSdk {
     const data = itf.encodeFunctionData('createContract', [
       ethUtil.toBuffer(message),
       signatories,
-      expirationDate,
-      value,
-      recipient,
+      expirationDate || '0',
+      value || '0',
+      recipient || '0x0000000000000000000000000000000000000000',
     ])
 
     const params = { to: CONTRACT_ADDR, data }

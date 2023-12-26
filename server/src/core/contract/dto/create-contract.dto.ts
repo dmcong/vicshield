@@ -1,10 +1,9 @@
-import { Types } from 'mongoose'
 import { Type } from 'class-transformer'
-import { IsString, IsMongoId, IsDate } from 'class-validator'
+import { IsString, IsDate, IsOptional } from 'class-validator'
 
 export class CreateContractDto {
-  @IsMongoId()
-  categoryId: Types.ObjectId | string
+  @IsString()
+  categoryId: string
 
   @IsString({ each: true })
   signatories: string[]
@@ -13,12 +12,15 @@ export class CreateContractDto {
   content: string
 
   @IsString()
+  @IsOptional()
   value: string
 
   @IsString()
+  @IsOptional()
   recipient: string
 
   @Type(() => Date)
   @IsDate()
+  @IsOptional()
   expirationDate: Date
 }
