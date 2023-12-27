@@ -21,9 +21,11 @@ import useIsMobile from 'hooks/system/useIsMobile'
 import { PRICE_PACKAGES } from './price'
 
 import './index.less'
+import { useOpenSubscription } from 'stores/useOpenSubscription'
 
 function Pricing() {
-  const [openPriceModal, setOpenPriceModal] = useState(false)
+  const { open: openPriceModal, setOpen: setOpenPriceModal } =
+    useOpenSubscription()
   const isMobile = useIsMobile()
 
   let USDollar = new Intl.NumberFormat('en-US', {

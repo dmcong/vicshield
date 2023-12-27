@@ -24,34 +24,21 @@ function FooterContact() {
           <Col span={12}>
             <Row gutter={[0, 10]}>
               <Col span={24}>
-                <Typography.Text type="secondary">Product</Typography.Text>
-              </Col>
-
-              <Col span={24}>
-                <Typography.Text>
-                  Notifications
-                  <Typography.Text style={{ marginLeft: 16 }} type="secondary">
-                    v1
-                  </Typography.Text>
+                <Typography.Text style={{ fontSize: 22 }} type="success">
+                  Product
                 </Typography.Text>
               </Col>
 
               <Col span={24}>
-                <Typography.Text>
-                  One ID
-                  <Typography.Text style={{ marginLeft: 16 }} type="secondary">
-                    v1
-                  </Typography.Text>
-                </Typography.Text>
+                <Typography.Text>Notifications</Typography.Text>
               </Col>
 
               <Col span={24}>
-                <Typography.Text>
-                  Tracking
-                  <Typography.Text style={{ marginLeft: 16 }} type="secondary">
-                    v1
-                  </Typography.Text>
-                </Typography.Text>
+                <Typography.Text>One ID</Typography.Text>
+              </Col>
+
+              <Col span={24}>
+                <Typography.Text>Tracking</Typography.Text>
               </Col>
 
               <Col span={24}>
@@ -67,7 +54,9 @@ function FooterContact() {
           <Col span={12}>
             <Row gutter={[0, 10]}>
               <Col span={24}>
-                <Typography.Text type="secondary">More</Typography.Text>
+                <Typography.Text style={{ fontSize: 22 }} type="secondary">
+                  More
+                </Typography.Text>
               </Col>
 
               <Col span={24}>

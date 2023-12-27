@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import SpaceVertical from 'components/system/space-vervical/SpaceVertical'
 
 import './index.less'
+import { useOpenSubscription } from 'stores/useOpenSubscription'
 
 const LIST_FEATURE = [
   'One ID',
@@ -20,6 +21,8 @@ const LIST_FEATURE = [
 
 function FooterSubscription() {
   const isMobile = useIsMobile()
+
+  const { setOpen } = useOpenSubscription()
 
   return (
     <Row gutter={[0, 55]}>
@@ -40,7 +43,11 @@ function FooterSubscription() {
             </Typography.Text>
           </Col>
           <Col span={!isMobile ? undefined : 24}>
-            <Button type="primary" style={{ height: 46, padding: '0 16px' }}>
+            <Button
+              type="primary"
+              style={{ height: 46, padding: '0 16px' }}
+              onClick={() => setOpen(true)}
+            >
               <Typography.Text>Get Early Access</Typography.Text>
             </Button>
           </Col>
