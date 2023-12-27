@@ -28,7 +28,9 @@ function PdfViewer({ base64Str, title }: { base64Str: string; title: string }) {
 
   return (
     <Fragment>
-      <Button onClick={() => setOpen(true)}>View Contract</Button>
+      <Button type="primary" onClick={() => setOpen(true)}>
+        View Contract
+      </Button>
       <Modal
         title={<Typography.Title level={4}>{title}</Typography.Title>}
         open={open}

@@ -1,6 +1,10 @@
 export interface IContract {
   _id: string
 
+  title: string
+
+  description: string
+
   categoryId: string
 
   owner: string
@@ -16,6 +20,8 @@ export interface IContract {
   expirationDate: Date
 
   contractExpirationDate?: Date
+
+  createdAt: string
 }
 
 export interface ISignatory {

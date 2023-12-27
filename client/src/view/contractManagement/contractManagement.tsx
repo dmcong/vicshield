@@ -1,21 +1,13 @@
 import Table, { ColumnsType } from 'antd/lib/table'
-import { DataType, STATUS } from '../../type/contract.type'
-import {
-  Col,
-  Divider,
-  Input,
-  Popconfirm,
-  Row,
-  Space,
-  Tag,
-  Typography,
-} from 'antd'
+import { STATUS } from '../../type/contract.type'
+import { Col, Divider, Input, Row, Space, Tag, Typography } from 'antd'
 import { COLORS } from '../../themes/colors'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Styles } from '../../type/styles.type'
 import { useContracts } from 'providers/contract.provider'
 import { IContract } from 'providers/contract.type'
 import { shortenAddress } from 'utils'
+import { Link } from 'react-router-dom'
 
 const getColorStatus = (status: STATUS) => {
   switch (status) {
@@ -74,10 +66,7 @@ const columns: ColumnsType<IContract> = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a>View</a>
-        {/* <Popconfirm title="Sure to delete?">
-          <a>Delete</a>
-        </Popconfirm> */}
+        <Link to={`/contract/${record._id}`}>View</Link>
       </Space>
     ),
   },

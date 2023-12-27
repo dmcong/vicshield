@@ -3,9 +3,15 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css'
 import { Viewer, Worker } from '@react-pdf-viewer/core'
 
 import { Row, Col } from 'antd'
-import { memo } from 'react'
+import { CSSProperties, memo } from 'react'
 
-function PdfReviewer({ base64Str }: { base64Str: string }) {
+function PdfReviewer({
+  base64Str,
+  style = {},
+}: {
+  base64Str: string
+  style?: CSSProperties
+}) {
   const pdfContentType = 'application/pdf'
 
   const base64toBlob = (data: string) => {
@@ -33,6 +39,7 @@ function PdfReviewer({ base64Str }: { base64Str: string }) {
             style={{
               border: '1px solid rgba(0, 0, 0, 0.3)',
               height: '300px',
+              ...style,
             }}
           >
             <Viewer fileUrl={url} theme="dark" />
