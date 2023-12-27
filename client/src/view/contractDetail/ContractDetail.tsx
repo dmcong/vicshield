@@ -1,9 +1,9 @@
 import { apiContracts, useContractData } from 'providers/contract.provider'
-import { useNavigate, useNavigation, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Button, Col, Row, Space, Tag, Typography } from 'antd'
 import { shortenAddress } from 'utils'
 import SpaceVertical from 'components/system/space-vervical/SpaceVertical'
-import { PropsWithChildren, useMemo, useState } from 'react'
+import { PropsWithChildren, useCallback, useMemo } from 'react'
 import moment from 'moment'
 import PdfViewer from 'components/pdf/pdfViewer'
 import PdfReviewer from 'components/pdf/pdfReviewer'
@@ -42,12 +42,18 @@ function ContractDetail() {
 
   const { address } = useAccount()
 
+  const reloadPage = useCallback(() => {
+    window.location.reload()
+  }, [])
+
   const signContract = async () => {
     await apiContracts.post(`/contract/${data._id}/sign`)
+    reloadPage()
   }
 
   const rejectContract = async () => {
     await apiContracts.post(`/contract/${data._id}/reject`)
+    reloadPage()
   }
 
   const signStatus = useMemo(() => {

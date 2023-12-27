@@ -86,6 +86,7 @@ const ContractManagement = () => {
     // } else {
     //   setData(dataSource)
     // }
+    window.location.reload()
   }
 
   return (
