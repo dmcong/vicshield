@@ -1,3 +1,6 @@
 export * from './DiscordIcon'
 export * from './CloseIcon'
 export * from './CheckedIcon'
+export * from './ActivitiesIcon'
+export * from './ShieldCheckIcon'
+export * from './CircleCheckIcon'

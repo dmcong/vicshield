@@ -1,0 +1,76 @@
+//.gradient-feature {
+//  background: linear-gradient(
+//    266deg,
+//    #fae2b6 17.15%,
+//    #ef90b8 60.53%,
+//    #b684f0 86.55%
+//  );
+//}
+
+//@card-fill: #111827;
+
+.ant-card {
+  &:not(.card-transparent) {
+    background: linear-gradient(0deg, #362d80 0%, #111827 20%, #111827 100%),
+      linear-gradient(
+        201deg,
+        rgba(214, 211, 194, 0.2) 0%,
+        rgba(92, 92, 92, 0.14) 100%
+      ) !important;
+  }
+  &:not(.flexible-radius) {
+    border-radius: 32px !important;
+  }
+  box-shadow: none !important;
+  border: none;
+}
+
+.flip-card {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: translateZ(-10px);
+  height: 365px;
+
+  &:hover {
+    .flip-card-front {
+      transform: rotateY(-180deg) translateZ(5px);
+    }
+    .flip-card-back {
+      transform: rotateY(0deg) translateZ(30px);
+    }
+  }
+  &-back,
+  &-front {
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+  }
+  &-front {
+    position: relative;
+    transform: rotateY(0deg) translateZ(5px);
+  }
+  &-back {
+    position: absolute !important;
+    width: calc(100% - 24px);
+    height: calc(100% - 24px);
+    top: 12px;
+    left: 12px;
+    background-color: transparent !important;
+    backdrop-filter: blur(15px);
+    transform: rotateY(180deg) translateZ(-5px);
+    border-radius: 24px !important;
+    border: 1px solid #0b081e2e !important;
+  }
+}
+
+@media screen and (max-width: 991.9px) {
+  .grid-layout {
+    display: flex;
+  }
+  .item-grid {
+    min-height: 250px;
+  }
+  .icon-feature {
+    width: 300px;
+  }
+}

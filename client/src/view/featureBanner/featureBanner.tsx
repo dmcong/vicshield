@@ -4,6 +4,13 @@ import { Styles } from '../../type/styles.type'
 import { COLORS } from '../../themes/colors'
 import images from '../../static/images'
 import useIsMobile from 'hooks/system/useIsMobile'
+import FlipCard from 'components/system/flip-card'
+import Icon from '@ant-design/icons'
+import {
+  ActivitiesIcon,
+  CircleCheckIcon,
+  ShieldCheckIcon,
+} from 'static/images/icon'
 
 const FeatureBanner = () => {
   const isMobile = useIsMobile()
@@ -122,61 +129,35 @@ const FeatureBanner = () => {
 
   const renderStatusUpdate = () => {
     return (
-      <Col style={styles.card}>
-        <Row>
-          <Col span={24} style={styles.cardContentContainer}>
-            <Col>
-              <Typography.Title style={styles.inAppChatting}>
-                Status Update
-              </Typography.Title>
-            </Col>
-            <Typography.Text style={styles.cardContent}>
-              Lorem ipsum dolor sit amet jamet, consectetur adipis cing elit sed
-              dodol eiusmod tempor incididunt.
-            </Typography.Text>
-          </Col>
-        </Row>
-      </Col>
+      <FlipCard
+        title="Status Update"
+        icon=""
+        iconFront={<Icon component={() => <ActivitiesIcon />} />}
+        desc="Receive instant alerts on the progress of your documents from initiation to completion.
+With real-time status updates, you'll always be in the loop, ensuring that you never miss a crucial milestone in your digital signing journey."
+      />
     )
   }
 
   const renderSubSignature = () => {
     return (
-      <Col style={styles.card}>
-        <Row>
-          <Col span={24} style={styles.cardContentContainer}>
-            <Col>
-              <Typography.Title style={styles.inAppChatting}>
-                Sub-signature
-              </Typography.Title>
-            </Col>
-            <Typography.Text style={styles.cardContent}>
-              Lorem ipsum dolor sit amet jamet, consectetur adipis cing elit sed
-              dodol eiusmod tempor incididunt.
-            </Typography.Text>
-          </Col>
-        </Row>
-      </Col>
+      <FlipCard
+        title="Sub-signature"
+        icon=""
+        iconFront={<Icon component={() => <ShieldCheckIcon />} />}
+        desc="An innovative feature by VicShield that revolutionizes complex signing workflows. Empower multiple signatories within a single document to individually endorse specific sections, ensuring a streamlined and efficient signing process."
+      />
     )
   }
 
   const renderTracking = () => {
     return (
-      <Col style={styles.card}>
-        <Row>
-          <Col span={24} style={styles.cardContentContainer}>
-            <Col>
-              <Typography.Title style={styles.inAppChatting}>
-                Tracking
-              </Typography.Title>
-            </Col>
-            <Typography.Text style={styles.cardContent}>
-              Lorem ipsum dolor sit amet jamet, consectetur adipis cing elit sed
-              dodol eiusmod tempor incididunt.
-            </Typography.Text>
-          </Col>
-        </Row>
-      </Col>
+      <FlipCard
+        title="Tracking"
+        icon=""
+        iconFront={<Icon component={() => <CircleCheckIcon />} />}
+        desc="Elevate your transactional experience with unparalleled transparency – discover the power of our Tracking feature. Now, tracking the time and signer details throughout the entire signature process is effortlessly at your fingertips, empowering you with the ability to monitor and manage every aspect of the signing timeline."
+      />
     )
   }
 
