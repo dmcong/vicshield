@@ -22,12 +22,12 @@ const items: ItemCharacteristics[] = [
   {
     key: 2,
     image: images['rubic2'],
-    content: 'Streamline OperationManagement',
+    content: 'Streamline Operation Management',
   },
   {
     key: 3,
     image: images['rubic3'],
-    content: 'Non-OperationManagement',
+    content: 'Non-Operation Management',
   },
   {
     key: 4,
@@ -95,7 +95,7 @@ const CharacteristicsBanner = () => {
       <Swiper
         draggable={isMobile}
         spaceBetween={20}
-        slidesPerView={isMobile ? 2.5 : 4}
+        slidesPerView={isMobile ? 2 : 4}
       >
         {renderItems()}
       </Swiper>

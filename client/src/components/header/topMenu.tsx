@@ -119,6 +119,13 @@ const TopMenu = () => {
         style={{
           width: '100%',
           backgroundColor: 'transparent',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          padding: '0 16px',
+          zIndex: 999,
+          backdropFilter: 'blur(10px)',
+          height: 70,
         }}
       >
         <Row align={'middle'} style={{ flex: 1 }}>

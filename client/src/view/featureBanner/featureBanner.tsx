@@ -215,7 +215,7 @@ With real-time status updates, you'll always be in the loop, ensuring that you n
       )
     }
     return (
-      <Col span={24}>
+      <Col span={24} style={{ padding: '0 40px' }}>
         <Col span={24}>{renderOneId()}</Col>
         <Divider className={'borderNone'} />
 

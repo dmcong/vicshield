@@ -62,7 +62,7 @@ function Pricing() {
           </Row>
         </Col>
 
-        <Col span={24} style={{ padding: !isMobile ? ' 0 60px' : 0 }}>
+        <Col span={24} style={{ padding: !isMobile ? ' 0 60px' : '0 40px' }}>
           <Row gutter={!isMobile ? 16 : [0, 16]}>
             {PRICE_PACKAGES.map(({ id, title, features, pricing }) => {
               return (
