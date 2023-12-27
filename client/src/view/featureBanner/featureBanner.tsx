@@ -14,6 +14,9 @@ import {
 
 const FeatureBanner = () => {
   const isMobile = useIsMobile()
+  const fontSizeTitle = isMobile ? '2.5rem' : '3rem'
+  const fontSizeContent = isMobile ? '0.75rem' : '1rem'
+
   const renderTitle = () => {
     return (
       <Col span={24} style={isMobile ? undefined : styles.colTitleContent}>
@@ -40,7 +43,9 @@ const FeatureBanner = () => {
           </div>
         </Col>
         <Col>
-          <Typography.Text style={styles.cardContent}>
+          <Typography.Text
+            style={{ ...styles.cardContent, fontSize: fontSizeContent }}
+          >
             With OneID - Your Unified Multichain Identity across 80+ networks to
             unlock the infinite digital world by Nighty Eight, you can now
             conduct seamless transactions using personalized names, eliminating
@@ -57,16 +62,28 @@ const FeatureBanner = () => {
         <Row>
           <Col span={14} style={styles.cardContentContainer}>
             <Col>
-              <Typography.Title style={styles.inAppChatting}>
+              <Typography.Title
+                style={{ ...styles.inAppChatting, fontSize: fontSizeTitle }}
+              >
                 Chatting In-app
               </Typography.Title>
             </Col>
             <Col>
-              <li style={styles.cardContent}>Interactive In-app Chatting </li>
-              <li style={styles.cardContent}>Flexible Contract Upload </li>
-              <li style={styles.cardContent}>Real-time Notifications</li>
-              <li style={styles.cardContent}>Instant Status Updates </li>
-              <li style={styles.cardContent}>Integrated Tracking</li>
+              <li style={{ ...styles.cardContent, fontSize: fontSizeContent }}>
+                Interactive In-app Chatting{' '}
+              </li>
+              <li style={{ ...styles.cardContent, fontSize: fontSizeContent }}>
+                Flexible Contract Upload{' '}
+              </li>
+              <li style={{ ...styles.cardContent, fontSize: fontSizeContent }}>
+                Real-time Notifications
+              </li>
+              <li style={{ ...styles.cardContent, fontSize: fontSizeContent }}>
+                Instant Status Updates{' '}
+              </li>
+              <li style={{ ...styles.cardContent, fontSize: fontSizeContent }}>
+                Integrated Tracking
+              </li>
             </Col>
           </Col>
           <Col span={10} style={styles.imageCardContainer}>
@@ -85,11 +102,15 @@ const FeatureBanner = () => {
         <Row>
           <Col span={14} style={styles.cardContentContainer}>
             <Col>
-              <Typography.Title style={styles.inAppChatting}>
+              <Typography.Title
+                style={{ ...styles.inAppChatting, fontSize: fontSizeTitle }}
+              >
                 Upload contract
               </Typography.Title>
             </Col>
-            <Typography.Text style={styles.cardContent}>
+            <Typography.Text
+              style={{ ...styles.cardContent, fontSize: fontSizeContent }}
+            >
               Within the Web3 ecosystem, signatures evolve to create digital
               contracts that are not only transparent and secure but also
               immutable. This transformative approach ensures trust, efficiency,
@@ -123,7 +144,9 @@ const FeatureBanner = () => {
               <Image preview={false} src={images['close']} />
             </div>
           </Row>
-          <Typography.Text style={styles.cardContent}>
+          <Typography.Text
+            style={{ ...styles.cardContent, fontSize: fontSizeContent }}
+          >
             Stay seamlessly informed throughout the entire contract signing
             process, our robust notification system ensures that no crucial
             information goes unnoticed. Receive real-time updates on any actions
@@ -244,7 +267,6 @@ const styles: Styles = {
     textAlign: 'center',
   },
   inAppChatting: {
-    fontSize: '3rem',
     fontWeight: 'bold',
     color: COLORS.WHITE,
   },
@@ -254,7 +276,6 @@ const styles: Styles = {
     color: COLORS.WHITE,
   },
   cardContent: {
-    fontSize: '1rem',
     fontWeight: '400',
     color: COLORS.WHITE,
   },
