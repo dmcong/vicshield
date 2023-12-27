@@ -9,6 +9,7 @@ import { AppService } from './app.service'
 import configuration, { EnvironmentVariables } from 'src/configs'
 import { ContractModule } from './contract/contract.module'
 import { UserModule } from './user/user.module'
+import { TrialModule } from './trial/trial.module';
 
 @Global()
 @Module({
@@ -26,6 +27,7 @@ import { UserModule } from './user/user.module'
       },
       inject: [ConfigService],
     }),
+    TrialModule,
   ],
   exports: [JwtModule],
 })
