@@ -9,11 +9,13 @@ import 'aos/dist/aos.css'
 import TopMenu from 'components/header/topMenu'
 import Footer from 'components/footer'
 
-import './index.less'
 import CreateContract from './createContract'
 import ContractsProvider from 'providers/contract.provider'
 import ContractManagement from './contractManagement/contractManagement'
 import ContractDetail from 'view/contractDetail/ContractDetail'
+import ContractOverview from 'view/contract-overview'
+
+import './index.less'
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>()
@@ -60,12 +62,7 @@ const App: React.FC = () => {
                         </ContractsProvider>
                       }
                     />
-                    {/* <Route
-                      path="/contract/:hash"
-                      element={
-                        <ContractsProvider>Contract details</ContractsProvider>
-                      }
-                    /> */}
+                    <Route path="/contract" element={<ContractOverview />} />
 
                     <Route
                       path="/contract/:id"

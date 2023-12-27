@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import { Col, Drawer, Menu, Row } from 'antd'
+import React, { useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+import { Button, Col, Drawer, Menu, Row } from 'antd'
 import { MenuOutlined } from '@ant-design/icons'
 
 import Brand from 'components/system/brand'
-import BtnConnectWallet from 'components/base-btn/BtnConnectWallet'
 
 import useIsMobile from 'hooks/system/useIsMobile'
 
@@ -57,6 +58,14 @@ const styles: Styles = {
   },
 }
 const TopMenu = () => {
+  const router = useLocation()
+
+  const navigate = useNavigate()
+
+  const isLandingPage = useMemo(
+    () => router.pathname === '/home',
+    [router.pathname],
+  )
   const [current, setCurrent] = useState('mail')
   const [open, setOpen] = useState(false)
   const isMobile = useIsMobile()
@@ -86,7 +95,13 @@ const TopMenu = () => {
             <Brand />
           </Col>
           <Col flex={0.5}>
-            <BtnConnectWallet />
+            <Button
+              type="primary"
+              style={styles.button}
+              onClick={() => navigate('/contract')}
+            >
+              Use VicShield
+            </Button>
           </Col>
           <Col flex={0.5}>
             <MenuOutlined
@@ -108,6 +123,10 @@ const TopMenu = () => {
     )
   }
 
+  // if (!isLandingPage) {
+  //   return <>Header</>
+  // }
+
   return (
     <>
       {!isMobile ? (
@@ -119,6 +138,7 @@ const TopMenu = () => {
             width: '100%',
             zIndex: 999,
             backdropFilter: 'blur(10px)',
+            maxWidth: 1160,
           }}
         >
           <Row className={'menu'} style={styles.container}>
@@ -137,7 +157,13 @@ const TopMenu = () => {
                 items={items}
                 className="menu-header"
               />
-              <BtnConnectWallet />
+              <Button
+                type="primary"
+                style={styles.button}
+                onClick={() => navigate('/contract')}
+              >
+                Use VicShield
+              </Button>
             </Row>
           </Row>
         </div>
