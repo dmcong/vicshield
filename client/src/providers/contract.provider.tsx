@@ -45,7 +45,7 @@ export const useContractsStore = create<ContractStore>()((set, get) => ({
   },
 }))
 
-const apiContracts = axios.create({ baseURL: 'http://localhost:9000' })
+export const vicsheildAPI = axios.create({ baseURL: 'http://localhost:9000' })
 
 const ContractsProvider = ({ children }: PropsWithChildren) => {
   const upset = useContractsStore((state) => state.upsetContracts)
@@ -53,13 +53,13 @@ const ContractsProvider = ({ children }: PropsWithChildren) => {
   const { data } = useWalletClient()
 
   useEffect(() => {
-    apiContracts.defaults.headers['wallet'] = data?.account.address || ''
+    vicsheildAPI.defaults.headers['wallet'] = data?.account.address || ''
   }, [data])
 
   const fetchContracts = useCallback(async () => {
     try {
       setLoading(true)
-      const res = await apiContracts.get<any[]>(
+      const res = await vicsheildAPI.get<any[]>(
         '/contract?owner=' + data?.account.address,
       )
       upset(res.data)
@@ -98,7 +98,7 @@ export const useContractMutation = () => {
 
   const onFetch = useCallback(
     async (contractId: string) => {
-      const res = await apiContracts.get<any>(`/contract/${contractId}`)
+      const res = await vicsheildAPI.get<any>(`/contract/${contractId}`)
       upset([res.data])
     },
     [upset],
@@ -111,15 +111,15 @@ export const useContractMutation = () => {
       value?: string
       recipient?: string
     }) => {
-      const res = await apiContracts.post<any>(`/contract`, payload)
+      const res = await vicsheildAPI.post<any>(`/contract`, payload)
       await onFetch(res.data._id)
       return res
     },
-    [wallet],
+    [onFetch],
   )
 
   return useMemo(
     () => ({ onFetch, onCreateContract, from: wallet.data?.account.address }),
-    [onCreateContract],
+    [onCreateContract, onFetch, wallet.data?.account.address],
   )
 }

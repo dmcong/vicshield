@@ -1,14 +1,11 @@
-import { Row, Col, Typography, Statistic } from 'antd'
-import { ContainerOutlined } from '@ant-design/icons'
+import { Row, Col } from 'antd'
 
-import Card from 'antd/lib/card/Card'
-import SubBanner from './subBanner'
-import { useSelector } from 'react-redux'
 import BannerHero from './bannerHero/bannerHero'
 import CharacteristicsBanner from './characteristicsBanner/characteristicsBanner'
 import SolutionBanner from './solutionBanner/solutionBanner'
 import FeatureBanner from './featureBanner/featureBanner'
 import Pricing from './pricing'
+import RoadMap from './roadMap/roadMap'
 
 const Home = () => {
   return (
@@ -35,6 +32,9 @@ const Home = () => {
         <FeatureBanner />
       </Col>
 
+      <Col span={24}>
+        <RoadMap />
+      </Col>
       <Col span={24}>
         <Pricing />
       </Col>

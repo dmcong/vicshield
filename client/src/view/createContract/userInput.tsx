@@ -1,9 +1,12 @@
 import { Button, Input, Modal } from 'antd'
-import React, { useState } from 'react'
+import { vicsheildAPI } from 'providers/contract.provider'
+import { useCallback, useState } from 'react'
+import { useDebounce } from 'react-use'
 
 const UserInput = ({ onOk }: { onOk: (value: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [val, setVal] = useState('')
+  const [oneId, setOneId] = useState('')
 
   const showModal = () => {
     setIsOpen(true)
@@ -11,7 +14,7 @@ const UserInput = ({ onOk }: { onOk: (value: string) => void }) => {
 
   const handleOk = () => {
     setIsOpen(false)
-    onOk(val)
+    onOk(oneId || val)
     setVal('')
   }
 
@@ -19,6 +22,19 @@ const UserInput = ({ onOk }: { onOk: (value: string) => void }) => {
     setIsOpen(false)
     setVal('')
   }
+
+  const fetchOneId = useCallback(async () => {
+    try {
+      if (!val) throw new Error('Please enter name')
+      const { data } = await vicsheildAPI.get<any>(`/oneid/${val}`)
+      const elm = data.find((d: any) => d.name === val)
+      setOneId(elm?.contractAddress || '')
+    } catch (error) {
+      setOneId('')
+    }
+  }, [val])
+
+  useDebounce(fetchOneId, 300, [fetchOneId])
 
   return (
     <>
@@ -32,6 +48,7 @@ const UserInput = ({ onOk }: { onOk: (value: string) => void }) => {
         onCancel={handleCancel}
       >
         <Input value={val} onChange={(e) => setVal(e.target.value)} />
+        <span>{oneId}</span>
       </Modal>
     </>
   )
