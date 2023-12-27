@@ -1,5 +1,5 @@
 import { Button, Input, Modal } from 'antd'
-import { vicsheildAPI } from 'providers/contract.provider'
+import { apiContracts } from 'providers/contract.provider'
 import { useCallback, useState } from 'react'
 import { useDebounce } from 'react-use'
 
@@ -26,7 +26,7 @@ const UserInput = ({ onOk }: { onOk: (value: string) => void }) => {
   const fetchOneId = useCallback(async () => {
     try {
       if (!val) throw new Error('Please enter name')
-      const { data } = await vicsheildAPI.get<any>(`/oneid/${val}`)
+      const { data } = await apiContracts.get<any>(`/oneid/${val}`)
       const elm = data.find((d: any) => d.name === val)
       setOneId(elm?.contractAddress || '')
     } catch (error) {
