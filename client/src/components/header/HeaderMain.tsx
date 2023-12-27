@@ -32,7 +32,7 @@ function HeaderMain() {
           justify="space-between"
           align="middle"
           wrap={false}
-          style={{ maxWidth: 1160, margin: '0 auto', height: 90 }}
+          style={{ maxWidth: 1160, margin: '0 auto', height: 70 }}
         >
           <Col>
             <Space>
