@@ -36,10 +36,11 @@ const items: MenuProps['items'] = [
 const styles: Styles = {
   container: {
     backgroundColor: COLORS.MENU_BACKGROUND,
-    width: '80%',
+    width: '100%',
     borderRadius: 99,
     paddingLeft: 10,
     paddingRight: 10,
+    margin: '0 auto',
   },
   menu: {
     borderWidth: 0,
@@ -110,20 +111,36 @@ const TopMenu = () => {
   return (
     <>
       {!isMobile ? (
-        <Row className={'menu'} style={styles.container}>
-          <Row justify={'space-between'} align={'middle'} style={{ flex: 1 }}>
-            <Brand />
-            <Menu
-              onClick={onClick}
-              style={styles.menu}
-              selectedKeys={[current]}
-              mode="horizontal"
-              items={items}
-              className="menu-header"
-            />
-            <BtnConnectWallet />
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            padding: '32px 40px 0',
+            width: '100%',
+            zIndex: 999,
+            backdropFilter: 'blur(10px)',
+          }}
+        >
+          <Row className={'menu'} style={styles.container}>
+            <Row
+              justify={'space-between'}
+              align={'middle'}
+              style={{ flex: 1 }}
+              wrap={false}
+            >
+              <Brand />
+              <Menu
+                onClick={onClick}
+                style={styles.menu}
+                selectedKeys={[current]}
+                mode="horizontal"
+                items={items}
+                className="menu-header"
+              />
+              <BtnConnectWallet />
+            </Row>
           </Row>
-        </Row>
+        </div>
       ) : (
         renderHamburger()
       )}

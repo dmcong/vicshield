@@ -7,6 +7,9 @@ export type ContractDocument = HydratedDocument<ContractModel>
 
 @Schema({ timestamps: true, autoIndex: true, optimisticConcurrency: true })
 export class ContractModel implements Omit<IContract, '_id'> {
+  @Prop({ type: SchemaTypes.String })
+  title: string
+
   @Prop({ type: SchemaTypes.ObjectId })
   categoryId: Types.ObjectId
 

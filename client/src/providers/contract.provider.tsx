@@ -10,6 +10,8 @@ import produce from 'immer'
 import { IContract } from './contract.type'
 import axios from 'axios'
 import { useWalletClient } from 'wagmi'
+import { CreateContractDto } from 'type/contract.type'
+import configs from 'configs'
 
 type MetaProposalMethods = {
   upsetContracts: (metaProposals: IContract[]) => void
@@ -45,7 +47,9 @@ export const useContractsStore = create<ContractStore>()((set, get) => ({
   },
 }))
 
-export const vicsheildAPI = axios.create({ baseURL: 'http://localhost:9000' })
+export const apiContracts = axios.create({
+  baseURL: configs.baseUrl.apiContracts,
+})
 
 const ContractsProvider = ({ children }: PropsWithChildren) => {
   const upset = useContractsStore((state) => state.upsetContracts)
@@ -53,16 +57,17 @@ const ContractsProvider = ({ children }: PropsWithChildren) => {
   const { data } = useWalletClient()
 
   useEffect(() => {
-    vicsheildAPI.defaults.headers['wallet'] = data?.account.address || ''
+    apiContracts.defaults.headers['wallet'] = data?.account.address || ''
   }, [data])
 
   const fetchContracts = useCallback(async () => {
     try {
       setLoading(true)
-      const res = await vicsheildAPI.get<any[]>(
-        '/contract?owner=' + data?.account.address,
-      )
-      upset(res.data)
+      const { data: contractRes } = await apiContracts.get<{
+        data: IContract[]
+        total: number
+      }>('/contract?owner=' + data?.account.address)
+      upset(contractRes.data)
     } catch (error) {
       console.error('error', error)
     } finally {
@@ -98,20 +103,15 @@ export const useContractMutation = () => {
 
   const onFetch = useCallback(
     async (contractId: string) => {
-      const res = await vicsheildAPI.get<any>(`/contract/${contractId}`)
+      const res = await apiContracts.get<any>(`/contract/${contractId}`)
       upset([res.data])
     },
     [upset],
   )
 
   const onCreateContract = useCallback(
-    async (payload: {
-      content: string
-      signatories: string[]
-      value?: string
-      recipient?: string
-    }) => {
-      const res = await vicsheildAPI.post<any>(`/contract`, payload)
+    async (payload: CreateContractDto) => {
+      const res = await apiContracts.post<any>(`/contract`, payload)
       await onFetch(res.data._id)
       return res
     },

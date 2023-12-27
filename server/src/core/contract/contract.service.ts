@@ -70,14 +70,12 @@ export class ContractService {
       categoryId,
     }: FindListContractDto,
   ) {
-    console.log('wallet', wallet)
     const filter: FilterQuery<ContractModel> = {
       owner: wallet,
     }
     if (categoryId) {
       filter.categoryId = categoryId
     }
-    console.log('filter', filter)
 
     const [data, total] = await Promise.all([
       this.contractModel
