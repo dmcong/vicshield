@@ -24,7 +24,7 @@ function FooterContact() {
           <Col span={12}>
             <Row gutter={[0, 10]}>
               <Col span={24}>
-                <Typography.Text style={{ fontSize: 22 }} type="success">
+                <Typography.Text style={{ fontSize: 22 }}>
                   Product
                 </Typography.Text>
               </Col>

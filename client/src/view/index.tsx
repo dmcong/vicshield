@@ -14,6 +14,7 @@ import ContractsProvider from 'providers/contract.provider'
 import ContractManagement from './contractManagement/contractManagement'
 import ContractDetail from 'view/contractDetail/ContractDetail'
 import ContractOverview from 'view/contract-overview'
+import ModalSubscription from 'components/modal/ModalSubscription'
 
 import './index.less'
 
@@ -88,6 +89,8 @@ const App: React.FC = () => {
                   <Footer />
                 </Col>
               </Row>
+
+              <ModalSubscription />
             </Layout.Content>
           </Col>
         </Row>

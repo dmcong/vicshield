@@ -114,7 +114,9 @@ function ContractOverview() {
                 <Image src={contract3} width="75%" preview={false} />
               </div>
               <SpaceVertical style={{ padding: 16 }}>
-                <Typography.Title level={5}>Upload Contract</Typography.Title>
+                <Typography.Title level={5}>
+                  Create contract base in template
+                </Typography.Title>
                 <Typography.Paragraph style={{ height: 150 }}>
                   Another feature on the interface is to create a contract based
                   on available templates. When clicking on this option, users
