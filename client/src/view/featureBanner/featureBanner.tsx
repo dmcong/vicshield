@@ -41,8 +41,10 @@ const FeatureBanner = () => {
         </Col>
         <Col>
           <Typography.Text style={styles.cardContent}>
-            Lorem ipsum dolor sit amet jamet, consectetur adipis cing elit sed
-            dodol eiusmod tempor incididunt.
+            With OneID - Your Unified Multichain Identity across 80+ networks to
+            unlock the infinite digital world by Nighty Eight, you can now
+            conduct seamless transactions using personalized names, eliminating
+            the complexities associated with cryptographic addresses.
           </Typography.Text>
         </Col>
       </Col>
@@ -59,10 +61,13 @@ const FeatureBanner = () => {
                 Chatting In-app
               </Typography.Title>
             </Col>
-            <Typography.Text style={styles.cardContent}>
-              Lorem ipsum dolor sit amet jamet, consectetur adipis cing elit sed
-              dodol eiusmod tempor incididunt.
-            </Typography.Text>
+            <Col>
+              <li style={styles.cardContent}>Interactive In-app Chatting </li>
+              <li style={styles.cardContent}>Flexible Contract Upload </li>
+              <li style={styles.cardContent}>Real-time Notifications</li>
+              <li style={styles.cardContent}>Instant Status Updates </li>
+              <li style={styles.cardContent}>Integrated Tracking</li>
+            </Col>
           </Col>
           <Col span={10} style={styles.imageCardContainer}>
             <div>
@@ -81,12 +86,14 @@ const FeatureBanner = () => {
           <Col span={14} style={styles.cardContentContainer}>
             <Col>
               <Typography.Title style={styles.inAppChatting}>
-                Upload docs
+                Upload contract
               </Typography.Title>
             </Col>
             <Typography.Text style={styles.cardContent}>
-              Lorem ipsum dolor sit amet jamet, consectetur adipis cing elit sed
-              dodol eiusmod tempor incididunt.
+              Within the Web3 ecosystem, signatures evolve to create digital
+              contracts that are not only transparent and secure but also
+              immutable. This transformative approach ensures trust, efficiency,
+              and seamless interactions across decentralized platforms
             </Typography.Text>
           </Col>
           <Col span={10} style={styles.imageCardContainer}>
@@ -117,10 +124,11 @@ const FeatureBanner = () => {
             </div>
           </Row>
           <Typography.Text style={styles.cardContent}>
-            Lorem ipsum dolor sit amet, consecte tur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Stay seamlessly informed throughout the entire contract signing
+            process, our robust notification system ensures that no crucial
+            information goes unnoticed. Receive real-time updates on any actions
+            taken within the signing progress,empowering you with instant
+            insights into the status of your contracts.
           </Typography.Text>
         </Col>
       </Col>
