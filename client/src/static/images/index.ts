@@ -19,8 +19,14 @@ import Q1_2024 from './Q1-2024.png'
 import Q2_2024 from './Q2-2024.png'
 import Q3_2024 from './Q3-2024.png'
 import Q4_2024 from './Q4-2024.png'
-
 import TheFutureMobile from './theFuMobile.png'
+import chart1 from './chart1.png'
+
+import chart2 from './chart2.png'
+
+import chart3 from './chart3.png'
+
+import chart4 from './chart4.png'
 
 const images = {
   viction: VictionIcon,
@@ -45,6 +51,10 @@ const images = {
   Q2_2024,
   Q3_2024,
   Q4_2024,
+  chart1,
+  chart2,
+  chart3,
+  chart4,
 }
 
 export default images

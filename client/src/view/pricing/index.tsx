@@ -83,7 +83,6 @@ function Pricing() {
                               fontWeight: 500,
                               wordSpacing: 3000 /*word spacing 3000 for force word break*/,
                               textTransform: 'uppercase',
-
                               letterSpacing: 3.2,
                             }}
                           >
