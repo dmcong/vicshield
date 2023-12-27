@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Button, Col, Drawer, Menu, Row } from 'antd'
 import { MenuOutlined } from '@ant-design/icons'
 
+import HeaderMain from 'components/header/HeaderMain'
 import Brand from 'components/system/brand'
 
 import useIsMobile from 'hooks/system/useIsMobile'
@@ -123,9 +124,23 @@ const TopMenu = () => {
     )
   }
 
-  // if (!isLandingPage) {
-  //   return <>Header</>
-  // }
+  if (!isLandingPage) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          padding: '32px 40px 0',
+          width: '100%',
+          zIndex: 999,
+          backdropFilter: 'blur(10px)',
+          maxWidth: 1160,
+        }}
+      >
+        <HeaderMain />
+      </div>
+    )
+  }
 
   return (
     <>

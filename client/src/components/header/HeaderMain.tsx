@@ -1,24 +1,26 @@
 import React from 'react'
-import { Col, Input, Layout, Row, Space } from 'antd'
+import { Col, Row, Space } from 'antd'
+import { MessageOutlined, BellOutlined } from '@ant-design/icons'
 import Brand from 'components/system/brand'
+import BtnConnectWallet from 'components/base-btn/BtnConnectWallet'
 
 function HeaderMain() {
   return (
-    <div>
-      <Layout.Header>
-        <Row>
-          <Col>
-            <Space>
-              <Brand />
+    <Row justify="space-between" wrap={false}>
+      <Col>
+        <Space>
+          <Brand />
+        </Space>
+      </Col>
 
-              <Input.Search />
-            </Space>
-          </Col>
-
-          <Col></Col>
-        </Row>
-      </Layout.Header>
-    </div>
+      <Col>
+        <Space>
+          <MessageOutlined />
+          <BellOutlined />
+          <BtnConnectWallet />
+        </Space>
+      </Col>
+    </Row>
   )
 }
 
