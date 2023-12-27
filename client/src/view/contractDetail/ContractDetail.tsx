@@ -1,14 +1,16 @@
-import { useContractData } from 'providers/contract.provider'
-import { useParams } from 'react-router-dom'
-import { Col, Row, Space, Tag, Typography } from 'antd'
+import { apiContracts, useContractData } from 'providers/contract.provider'
+import { useNavigate, useNavigation, useParams } from 'react-router-dom'
+import { Button, Col, Row, Space, Tag, Typography } from 'antd'
 import { shortenAddress } from 'utils'
 import SpaceVertical from 'components/system/space-vervical/SpaceVertical'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useMemo, useState } from 'react'
 import moment from 'moment'
 import PdfViewer from 'components/pdf/pdfViewer'
 import PdfReviewer from 'components/pdf/pdfReviewer'
 import { FilePdfFilled as PdfIcon } from '@ant-design/icons'
 import useIsMobile from 'hooks/system/useIsMobile'
+import { useAccount } from 'wagmi'
+import { SignStatus } from 'providers/contract.type'
 
 function ContractDetailField({
   title,
@@ -38,7 +40,33 @@ function ContractDetail() {
   const data = useContractData(id ?? '')
   const isMobile = useIsMobile()
 
-  console.log({ data })
+  const { address } = useAccount()
+
+  const signContract = async () => {
+    await apiContracts.post(`/contract/${data._id}/sign`)
+  }
+
+  const rejectContract = async () => {
+    await apiContracts.post(`/contract/${data._id}/reject`)
+  }
+
+  const signStatus = useMemo(() => {
+    if (!data) return
+    return data.signatories?.find((signatory) => signatory.wallet === address)
+      ?.status
+  }, [data])
+
+  const signGreen = useMemo(() => {
+    switch (signStatus) {
+      case SignStatus.Pending:
+        return 'gray'
+      case SignStatus.Rejected:
+        return 'red'
+      case SignStatus.Signed:
+        return 'green'
+    }
+  }, [signStatus])
+
   if (!data) return null
 
   return (
@@ -125,20 +153,15 @@ function ContractDetail() {
 
           <Col span={!isMobile ? 6 : 12}>
             <ContractDetailField title="Status">
-              <Tag color="green" style={{ padding: '4px 8px' }}>
-                Signed
+              <Tag color={signGreen} style={{ padding: '4px 8px' }}>
+                {signStatus}
               </Tag>
             </ContractDetailField>
           </Col>
 
           <Col span={24}>
             <ContractDetailField title="Description">
-              <Typography.Paragraph>
-                Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum
-                dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit
-                ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet Lorem
-                ipsum dolor sit ametLorem ipsum dolor sit amet
-              </Typography.Paragraph>
+              <Typography.Paragraph>{data.description}</Typography.Paragraph>
             </ContractDetailField>
           </Col>
 
@@ -151,8 +174,33 @@ function ContractDetail() {
                     style={{ height: 400, width: '100%' }}
                   />
                 </Col>
-                <Col>
+                <Col
+                  span={24}
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
                   <PdfViewer base64Str={data.content} title={data.title} />
+                  {data?.signatories.some(
+                    (signatory) =>
+                      signatory.wallet === address &&
+                      signatory.status === SignStatus.Pending,
+                  ) && (
+                    <Space size={16}>
+                      <Button
+                        type="primary"
+                        style={{ height: 48 }}
+                        onClick={signContract}
+                      >
+                        Sign Contract
+                      </Button>
+                      <Button
+                        type="ghost"
+                        style={{ background: 'red', height: 48 }}
+                        onClick={rejectContract}
+                      >
+                        Reject Contract
+                      </Button>
+                    </Space>
+                  )}
                 </Col>
               </Row>
             </ContractDetailField>

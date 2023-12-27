@@ -28,14 +28,26 @@ function PdfViewer({ base64Str, title }: { base64Str: string; title: string }) {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={() => setOpen(true)}>
+      <Button
+        type="primary"
+        onClick={(e) => {
+          e.stopPropagation()
+
+          setOpen(true)
+        }}
+        className="preview-pdf-btn"
+        style={{ height: 48 }}
+      >
         View Contract
       </Button>
       <Modal
         title={<Typography.Title level={4}>{title}</Typography.Title>}
         open={open}
         width={1000}
-        onCancel={() => setOpen(false)}
+        onCancel={(e) => {
+          e.stopPropagation()
+          setOpen(false)
+        }}
         footer={null}
       >
         <Row justify="center">

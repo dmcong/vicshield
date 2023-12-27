@@ -24,10 +24,15 @@ export interface IContract {
   createdAt: string
 }
 
+export enum SignStatus {
+  Signed = 'Signed',
+  Rejected = 'Rejected',
+  Pending = 'Waiting to sign',
+}
 export interface ISignatory {
   wallet: string
 
   timestamp?: Date
 
-  hasSigned: boolean
+  status: SignStatus
 }

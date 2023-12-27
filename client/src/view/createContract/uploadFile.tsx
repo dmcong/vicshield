@@ -1,13 +1,15 @@
 import { Button, Col, Row, Space, Typography } from 'antd'
 import { Upload } from 'antd/es'
 import { RcFile } from 'antd/lib/upload'
-import React, { useState } from 'react'
+import PdfViewer from 'components/pdf/pdfViewer'
+import { useState } from 'react'
 import { asyncWait } from 'utils'
 
 type Props = {
   onChange: (val: string) => void
+  value: string
 }
-const UploadFile = ({ onChange }: Props) => {
+const UploadFile = ({ onChange, value }: Props) => {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
@@ -64,9 +66,7 @@ const UploadFile = ({ onChange }: Props) => {
                 />
               </svg>
               <Typography.Text>Upload file successfully</Typography.Text>
-              <Button type="primary" className="btn-upload">
-                <Typography.Text>View contract</Typography.Text>
-              </Button>
+              <PdfViewer base64Str={value} title="" />
             </Space>
           ) : (
             <Space direction="vertical" size={18} align="center">

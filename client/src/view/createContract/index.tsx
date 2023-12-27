@@ -23,6 +23,7 @@ import './index.less'
 import TextArea from 'antd/lib/input/TextArea'
 import FormTitle from './formTitle'
 import { useDebounce } from 'react-use'
+import { useNavigate } from 'react-router-dom'
 
 const CREATE_CONTRACT_INIT_DATA: CreateContractDto = {
   title: '',
@@ -57,11 +58,14 @@ const CreateContract = () => {
 
   const signatories = Form.useWatch('signatories', form)
   const reviewers = Form.useWatch('reviewers', form)
+  const content = Form.useWatch('content', form)
 
   const [signer, setSigner] = useState('')
   const [reviewer, setReviewer] = useState('')
   const { onCreateContract, from } = useContractMutation()
   const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
 
   const handleChangeCategory = (val: string) => {
     form.setFieldValue('category', val)
@@ -95,6 +99,8 @@ const CreateContract = () => {
         method: 'eth_sendTransaction',
         params: [payload as any],
       })
+
+      navigate('/management')
     } catch (error: any) {
       message.error(error.message)
     } finally {
@@ -145,7 +151,10 @@ const CreateContract = () => {
         style={{ background: '#252533', padding: 16 }}
       >
         <Form.Item name="content" valuePropName="dummy">
-          <UploadFile onChange={(val) => form.setFieldValue('content', val)} />
+          <UploadFile
+            onChange={(val) => form.setFieldValue('content', val)}
+            value={content || ''}
+          />
         </Form.Item>
         <Form.Item name="title" label={<FormTitle text="Contract name" />}>
           <Input placeholder="Contract name" />

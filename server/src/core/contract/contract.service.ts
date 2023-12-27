@@ -9,7 +9,7 @@ import VicShieldSdk from 'src/vicshieldSdk'
 import { ConfigService } from '@nestjs/config'
 import { EnvironmentVariables } from 'src/configs'
 import { UserService } from '../user/user.service'
-import { ISignatory } from 'src/types/contract.type'
+import { ISignatory, SignStatus } from 'src/types/contract.type'
 import { FindListContractDto } from './dto/find-list-contract.dto'
 import {
   DEFAULT_PAGE,
@@ -47,7 +47,7 @@ export class ContractService {
       owner: wallet,
       signatories: dto.signatories.map<ISignatory>((signatory) => ({
         wallet: signatory,
-        hasSigned: false,
+        status: SignStatus.Pending,
       })),
     })
 
@@ -98,7 +98,22 @@ export class ContractService {
 
     const signatories = [...contract.signatories]
     contract.signatories = signatories.map((signatory) => {
-      if (signatory.wallet === wallet) return { ...signatory, hasSigned: true }
+      if (signatory.wallet === wallet)
+        return { ...signatory, status: SignStatus.Signed }
+
+      return signatory
+    })
+    return contract.save()
+  }
+
+  async reject(contractId: string | Types.ObjectId, wallet: string) {
+    const contract = await this.contractModel.findById(contractId)
+    if (!contract) throw new BadRequestException()
+
+    const signatories = [...contract.signatories]
+    contract.signatories = signatories.map((signatory) => {
+      if (signatory.wallet === wallet)
+        return { ...signatory, status: SignStatus.Rejected }
 
       return signatory
     })

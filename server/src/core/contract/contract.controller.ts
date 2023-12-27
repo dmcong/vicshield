@@ -62,4 +62,12 @@ export class ContractController {
   ) {
     return this.contractService.sign(contractId, user.wallet)
   }
+
+  @Post('/:contractId/reject')
+  async reject(
+    @Req() { user }: AuthContext<Request>,
+    @Param() { contractId }: FindContractByIdDto,
+  ) {
+    return this.contractService.reject(contractId, user.wallet)
+  }
 }
