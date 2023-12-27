@@ -12,8 +12,8 @@ import {
 } from 'antd'
 import { Transaction, hexlify } from 'ethers'
 
-import { Fragment, useState } from 'react'
-import { useContractMutation } from 'providers/contract.provider'
+import { Fragment, useCallback, useState } from 'react'
+import { apiContracts, useContractMutation } from 'providers/contract.provider'
 
 import { decode } from 'bs58'
 import { CreateContractDto } from 'type/contract.type'
@@ -22,6 +22,7 @@ import UploadFile from './uploadFile'
 import './index.less'
 import TextArea from 'antd/lib/input/TextArea'
 import FormTitle from './formTitle'
+import { useDebounce } from 'react-use'
 
 const CREATE_CONTRACT_INIT_DATA: CreateContractDto = {
   title: '',
@@ -101,16 +102,30 @@ const CreateContract = () => {
     }
   }
 
-  const addSigner = (value: string) => {
+  const addSigner = async (value: string) => {
+    const { data } = await apiContracts.get<any>(`/oneid/${value}`)
+    const elm = data.find((d: any) => d.name === value)
+
     const signatories = form.getFieldValue('signatories') || []
-    signatories.push(value)
+    if (elm?.contractAddress) {
+      signatories.push(elm.contractAddress)
+    } else {
+      signatories.push(value)
+    }
     form.setFieldValue('signatories', signatories)
     setSigner('')
   }
 
-  const addReviewer = (value: string) => {
+  const addReviewer = async (value: string) => {
+    const { data } = await apiContracts.get<any>(`/oneid/${value}`)
+    const elm = data.find((d: any) => d.name === value)
+
     const reviewers = form.getFieldValue('reviewers') || []
-    reviewers.push(value)
+    if (elm?.contractAddress) {
+      reviewers.push(elm.contractAddress)
+    } else {
+      reviewers.push(value)
+    }
     form.setFieldValue('reviewers', reviewers)
     setReviewer('')
   }

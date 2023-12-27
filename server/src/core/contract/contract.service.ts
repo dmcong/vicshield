@@ -71,7 +71,7 @@ export class ContractService {
     }: FindListContractDto,
   ) {
     const filter: FilterQuery<ContractModel> = {
-      owner: wallet,
+      $or: [{ owner: wallet }, { signatories: wallet }, { reviewers: wallet }],
     }
     if (categoryId) {
       filter.categoryId = categoryId
