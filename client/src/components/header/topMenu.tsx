@@ -125,21 +125,7 @@ const TopMenu = () => {
   }
 
   if (!isLandingPage) {
-    return (
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          padding: '32px 40px 0',
-          width: '100%',
-          zIndex: 999,
-          backdropFilter: 'blur(10px)',
-          maxWidth: 1160,
-        }}
-      >
-        <HeaderMain />
-      </div>
-    )
+    return <HeaderMain />
   }
 
   return (
