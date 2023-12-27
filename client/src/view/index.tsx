@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { Col, Layout, Row } from 'antd'
 import Home from './home'
@@ -7,18 +7,15 @@ import UILoader from 'uiloader'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import TopMenu from 'components/header/topMenu'
-import BannerHero from './bannerHero/bannerHero'
-import CharacteristicsBanner from './characteristicsBanner/characteristicsBanner'
-import SolutionBanner from './solutionBanner/solutionBanner'
-import FeatureBanner from './featureBanner/featureBanner'
 import Footer from 'components/footer'
-import Pricing from 'view/pricing'
 
-import './index.less'
 import CreateContract from './createContract'
 import ContractsProvider from 'providers/contract.provider'
-import RoadMap from './roadMap/roadMap'
 import ContractManagement from './contractManagement/contractManagement'
+import ContractDetail from 'view/contractDetail/ContractDetail'
+import ContractOverview from 'view/contract-overview'
+
+import './index.less'
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>()
@@ -65,10 +62,14 @@ const App: React.FC = () => {
                         </ContractsProvider>
                       }
                     />
+                    <Route path="/contract" element={<ContractOverview />} />
+
                     <Route
-                      path="/contract/:hash"
+                      path="/contract/:id"
                       element={
-                        <ContractsProvider>Contract details</ContractsProvider>
+                        <ContractsProvider>
+                          <ContractDetail />
+                        </ContractsProvider>
                       }
                     />
                     <Route
@@ -79,7 +80,7 @@ const App: React.FC = () => {
                         </ContractsProvider>
                       }
                     />
-                    <Route path="/*" element={<Home />} />
+                    <Route path="/*" element={<Navigate to="/home" />} />
                   </Routes>
                 </Col>
 

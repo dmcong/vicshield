@@ -25,6 +25,7 @@ const Brand = () => {
       onClick={handleNavigateHome}
       style={{ cursor: 'pointer', width: 150 }}
       align={'middle'}
+      wrap={false}
     >
       <Col>
         <Image width={51.94} src={images['viction']} preview={false} />

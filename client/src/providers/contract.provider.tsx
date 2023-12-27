@@ -11,6 +11,7 @@ import { IContract } from './contract.type'
 import axios from 'axios'
 import { useWalletClient } from 'wagmi'
 import { CreateContractDto } from 'type/contract.type'
+import configs from 'configs'
 
 type MetaProposalMethods = {
   upsetContracts: (metaProposals: IContract[]) => void
@@ -46,7 +47,9 @@ export const useContractsStore = create<ContractStore>()((set, get) => ({
   },
 }))
 
-const apiContracts = axios.create({ baseURL: 'http://localhost:9000' })
+export const apiContracts = axios.create({
+  baseURL: configs.baseUrl.apiContracts,
+})
 
 const ContractsProvider = ({ children }: PropsWithChildren) => {
   const upset = useContractsStore((state) => state.upsetContracts)
@@ -112,11 +115,11 @@ export const useContractMutation = () => {
       await onFetch(res.data._id)
       return res
     },
-    [wallet],
+    [onFetch],
   )
 
   return useMemo(
     () => ({ onFetch, onCreateContract, from: wallet.data?.account.address }),
-    [onCreateContract],
+    [onCreateContract, onFetch, wallet.data?.account.address],
   )
 }

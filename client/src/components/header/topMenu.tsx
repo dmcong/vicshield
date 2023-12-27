@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { Col, Drawer, Menu, Row } from 'antd'
+import React, { useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+import { Button, Col, Drawer, Menu, Row } from 'antd'
 import { MenuOutlined } from '@ant-design/icons'
 
+import HeaderMain from 'components/header/HeaderMain'
 import Brand from 'components/system/brand'
-import BtnConnectWallet from 'components/base-btn/BtnConnectWallet'
 
 import useIsMobile from 'hooks/system/useIsMobile'
 
@@ -36,10 +38,11 @@ const items: MenuProps['items'] = [
 const styles: Styles = {
   container: {
     backgroundColor: COLORS.MENU_BACKGROUND,
-    width: '80%',
+    width: '100%',
     borderRadius: 99,
     paddingLeft: 10,
     paddingRight: 10,
+    margin: '0 auto',
   },
   menu: {
     borderWidth: 0,
@@ -56,6 +59,14 @@ const styles: Styles = {
   },
 }
 const TopMenu = () => {
+  const router = useLocation()
+
+  const navigate = useNavigate()
+
+  const isLandingPage = useMemo(
+    () => router.pathname === '/home',
+    [router.pathname],
+  )
   const [current, setCurrent] = useState('mail')
   const [open, setOpen] = useState(false)
   const isMobile = useIsMobile()
@@ -85,7 +96,13 @@ const TopMenu = () => {
             <Brand />
           </Col>
           <Col flex={0.5}>
-            <BtnConnectWallet />
+            <Button
+              type="primary"
+              style={styles.button}
+              onClick={() => navigate('/contract')}
+            >
+              Use VicShield
+            </Button>
           </Col>
           <Col flex={0.5}>
             <MenuOutlined
@@ -107,23 +124,50 @@ const TopMenu = () => {
     )
   }
 
+  if (!isLandingPage) {
+    return <HeaderMain />
+  }
+
   return (
     <>
       {!isMobile ? (
-        <Row className={'menu'} style={styles.container}>
-          <Row justify={'space-between'} align={'middle'} style={{ flex: 1 }}>
-            <Brand />
-            <Menu
-              onClick={onClick}
-              style={styles.menu}
-              selectedKeys={[current]}
-              mode="horizontal"
-              items={items}
-              className="menu-header"
-            />
-            <BtnConnectWallet />
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            padding: '32px 40px 0',
+            width: '100%',
+            zIndex: 999,
+            backdropFilter: 'blur(10px)',
+            maxWidth: 1160,
+          }}
+        >
+          <Row className={'menu'} style={styles.container}>
+            <Row
+              justify={'space-between'}
+              align={'middle'}
+              style={{ flex: 1 }}
+              wrap={false}
+            >
+              <Brand />
+              <Menu
+                onClick={onClick}
+                style={styles.menu}
+                selectedKeys={[current]}
+                mode="horizontal"
+                items={items}
+                className="menu-header"
+              />
+              <Button
+                type="primary"
+                style={styles.button}
+                onClick={() => navigate('/contract')}
+              >
+                Use VicShield
+              </Button>
+            </Row>
           </Row>
-        </Row>
+        </div>
       ) : (
         renderHamburger()
       )}
