@@ -21,4 +21,9 @@ export type CreateContractDto = {
   value?: string
   recipient?: string
   title: string
+  signDeadline: string
+  expirationDate: string
+  category: string
+  reviewers: string[]
+  description: string
 }

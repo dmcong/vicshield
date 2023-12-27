@@ -3,11 +3,13 @@ import { Types } from 'mongoose'
 export interface IContract {
   _id: Types.ObjectId | string
 
-  categoryId: Types.ObjectId | string
+  category: string
 
   owner: string
 
   signatories: ISignatory[]
+
+  reviewers: string[]
 
   content: string
 
@@ -17,7 +19,13 @@ export interface IContract {
 
   expirationDate: Date
 
+  signDeadline: Date
+
   contractExpirationDate?: Date
+
+  title: string
+
+  description: string
 }
 
 export class ISignatory {

@@ -6,10 +6,16 @@ export class CreateContractDto {
   title: string
 
   @IsString()
-  categoryId: string
+  description: string
+
+  @IsString()
+  category: string
 
   @IsString({ each: true })
   signatories: string[]
+
+  @IsString({ each: true })
+  reviewers: string[]
 
   @IsString()
   content: string
@@ -26,4 +32,9 @@ export class CreateContractDto {
   @IsDate()
   @IsOptional()
   expirationDate: Date
+
+  @Type(() => Date)
+  @IsDate()
+  @IsOptional()
+  signDeadline: Date
 }

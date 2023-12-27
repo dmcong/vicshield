@@ -10,19 +10,18 @@ import {
   Select,
   DatePicker,
 } from 'antd'
-import ButtonUploadFile from 'view/createContract/buttonUpload'
 import { Transaction, hexlify } from 'ethers'
 
 import { Fragment, useState } from 'react'
 import { useContractMutation } from 'providers/contract.provider'
-import UserInput from './userInput'
-import { useSendTransaction } from 'wagmi'
+
 import { decode } from 'bs58'
 import { CreateContractDto } from 'type/contract.type'
 import UploadFile from './uploadFile'
 
 import './index.less'
 import TextArea from 'antd/lib/input/TextArea'
+import FormTitle from './formTitle'
 
 const CREATE_CONTRACT_INIT_DATA: CreateContractDto = {
   title: '',
@@ -30,31 +29,38 @@ const CREATE_CONTRACT_INIT_DATA: CreateContractDto = {
   signatories: [],
   value: '',
   recipient: '',
+  signDeadline: '',
+  expirationDate: '',
+  category: '',
+  reviewers: [],
+  description: '',
 }
 
 const CATEGORIES = [
   {
-    value: 'HD 1',
-    label: 'HD 1',
+    value: 'Hợp đồng thuê',
+    label: 'Hợp đồng thuê',
   },
   {
-    value: 'HD 2',
-    label: 'HD 2',
+    value: 'Hợp đồng lao động',
+    label: 'Hợp đồng lao động',
   },
   {
-    value: 'HD 3',
-    label: 'HD 3',
+    value: 'Sa thải nhân viên',
+    label: 'Sa thải nhân viên',
   },
 ]
 
 const CreateContract = () => {
   const [form] = Form.useForm<CreateContractDto>()
 
+  const signatories = Form.useWatch('signatories', form)
+  const reviewers = Form.useWatch('reviewers', form)
+
+  const [signer, setSigner] = useState('')
+  const [reviewer, setReviewer] = useState('')
   const { onCreateContract, from } = useContractMutation()
   const [loading, setLoading] = useState(false)
-  const [contractData, setContractData] = useState<CreateContractDto>(
-    CREATE_CONTRACT_INIT_DATA,
-  )
 
   const handleChangeCategory = (val: string) => {
     form.setFieldValue('category', val)
@@ -66,6 +72,8 @@ const CreateContract = () => {
   // })
 
   const handleCreateContract = async () => {
+    const contractData = await form.validateFields()
+
     try {
       setLoading(true)
       const { data } = (await onCreateContract(contractData)) as any
@@ -93,88 +101,199 @@ const CreateContract = () => {
     }
   }
 
-  const handleChangeSigners = (value: string) => {
-    setContractData((prev) => ({
-      ...prev,
-      signatories: [...prev.signatories, value],
-    }))
+  const addSigner = (value: string) => {
+    const signatories = form.getFieldValue('signatories') || []
+    signatories.push(value)
+    form.setFieldValue('signatories', signatories)
+    setSigner('')
+  }
+
+  const addReviewer = (value: string) => {
+    const reviewers = form.getFieldValue('reviewers') || []
+    reviewers.push(value)
+    form.setFieldValue('reviewers', reviewers)
+    setReviewer('')
   }
 
   return (
     <Fragment>
+      <Col span={24}>
+        <Typography.Title style={{ textAlign: 'center', marginBottom: 10 }}>
+          Create contract
+        </Typography.Title>
+      </Col>
       <Form
         form={form}
         initialValues={CREATE_CONTRACT_INIT_DATA}
         className="create-contract"
+        layout="vertical"
+        style={{ background: '#252533', padding: 16 }}
       >
-        <Col span={24}>
-          <Typography.Title>Create contract</Typography.Title>
-        </Col>
-        <Form.Item>
-          <UploadFile
-            onChange={(val) =>
-              setContractData((prev) => ({ ...prev, content: val }))
-            }
-          />
+        <Form.Item name="content" valuePropName="dummy">
+          <UploadFile onChange={(val) => form.setFieldValue('content', val)} />
         </Form.Item>
-        <Form.Item name="title">
+        <Form.Item name="title" label={<FormTitle text="Contract name" />}>
           <Input placeholder="Contract name" />
         </Form.Item>
 
-        <Form.Item name="description">
+        <Form.Item name="description" label={<FormTitle text="Description" />}>
           <TextArea placeholder="Description" rows={5} />
         </Form.Item>
 
-        <Form.Item name="signer">
-          <div style={{ display: 'flex', gap: 10 }}>
-            <Input placeholder="Signer address" style={{ flex: 1 }} />
-            <Button type="primary" style={{ width: 180 }}>
-              Add Signer
-            </Button>
-          </div>
+        <Form.Item name="signatories" label={<FormTitle text="Signers" />}>
+          <Fragment>
+            <div style={{ display: 'flex', gap: 10, marginBottom: 10 }}>
+              <Input
+                placeholder="Signer address"
+                style={{ flex: 1 }}
+                onChange={(e) => setSigner(e.target.value)}
+                value={signer}
+              />
+              <Button
+                type="primary"
+                style={{ width: 180, height: 46 }}
+                className="btn-add-user"
+                onClick={() => addSigner(signer)}
+              >
+                <Space align="center">
+                  <Typography.Text>Add Signer</Typography.Text>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                  >
+                    <path
+                      d="M5.5 12.4058H19.5M12.5 5.40576V19.4058"
+                      stroke="#FCFDFD"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Space>
+              </Button>
+            </div>
 
-          {contractData.signatories.map((signer) => (
-            <Col span={24}>{signer}</Col>
-          ))}
+            <Row gutter={[0, 10]}>
+              {signatories?.map((signer: string) => (
+                <Col key={signer} span={24}>
+                  {signer}
+                </Col>
+              ))}
+            </Row>
+          </Fragment>
         </Form.Item>
 
-        <Form.Item name="reviewer">
-          <div style={{ display: 'flex', gap: 10 }}>
-            <Input placeholder="Reviewer address" style={{ flex: 1 }} />
-            <Button type="primary" style={{ width: 180 }}>
-              Add Reviewers
-            </Button>
-          </div>
+        <Form.Item name="reviewers" label={<FormTitle text="Reviewers" />}>
+          <Fragment>
+            <div style={{ display: 'flex', gap: 10, marginBottom: 10 }}>
+              <Input
+                placeholder="Reviewer address"
+                style={{ flex: 1 }}
+                onChange={(e) => setReviewer(e.target.value)}
+                value={reviewer}
+              />
+              <Button
+                type="primary"
+                style={{ width: 180, height: 46 }}
+                className="btn-add-user"
+                onClick={() => addReviewer(reviewer)}
+              >
+                <Space align="center">
+                  <Typography.Text>Add Reviewers</Typography.Text>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                  >
+                    <path
+                      d="M5.5 12.4058H19.5M12.5 5.40576V19.4058"
+                      stroke="#FCFDFD"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Space>
+              </Button>
+            </div>
+            <Row gutter={[0, 10]}>
+              {reviewers?.map((signer: string) => (
+                <Col key={signer} span={24}>
+                  {signer}
+                </Col>
+              ))}
+            </Row>
+          </Fragment>
         </Form.Item>
 
-        <Form.Item name="category">
-          <Select onChange={handleChangeCategory} options={CATEGORIES} />
+        <Form.Item name="category" label={<FormTitle text="Category" />}>
+          <Select
+            onChange={handleChangeCategory}
+            options={CATEGORIES}
+            size="large"
+          />
         </Form.Item>
 
-        <Row>
+        <Row gutter={32}>
           <Col span={12}>
-            <Form.Item name="signDeadline">
-              <DatePicker />
+            <Form.Item
+              label={<FormTitle text="Date to sign" />}
+              name="signDeadline"
+              valuePropName="dummy"
+            >
+              <DatePicker
+                onChange={(e) =>
+                  form.setFieldValue('signDeadline', e?.toISOString())
+                }
+              />
             </Form.Item>
           </Col>
 
           <Col span={12}>
             <Form.Item
+              label={<FormTitle text="Date of expiry" />}
               name="expirationDate"
-              style={{ display: 'inline-block' }}
+              valuePropName="dummy"
             >
-              <DatePicker />
+              <DatePicker
+                onChange={(e) =>
+                  form.setFieldValue('expirationDate', e?.toISOString())
+                }
+              />
             </Form.Item>
           </Col>
         </Row>
 
-        <Col span={24}>
-          <UserInput onOk={handleChangeSigners} />
-        </Col>
-
-        <Col span={24}>
-          <Button onClick={handleCreateContract} block loading={loading}>
-            Create
+        <Col span={24} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button
+            onClick={handleCreateContract}
+            loading={loading}
+            type="primary"
+            style={{ height: 46 }}
+          >
+            <Space size={16}>
+              <Typography.Text>Create Contract</Typography.Text>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="25"
+                viewBox="0 0 24 25"
+                fill="none"
+              >
+                <path
+                  d="M14.5 22.4976H18C18.5304 22.4976 19.0391 22.2868 19.4142 21.9118C19.7893 21.5367 20 21.028 20 20.4976V7.99756L14.5 2.49756H6C5.46957 2.49756 4.96086 2.70827 4.58579 3.08334C4.21071 3.45842 4 3.96713 4 4.49756V8.49756M14 2.49756V8.49756H20M7.00001 17.4975L2.26001 14.6475M7.00001 17.4975L11.74 14.6475M7.00001 17.4975L7 22.4976M2.97 13.6175C2.37 13.9775 2 14.6375 2 15.3575V18.6375C2 19.3575 2.37 20.0175 2.97 20.3775L5.97 22.2075C6.6 22.5975 7.4 22.5975 8.03 22.2075L11.03 20.3775C11.63 20.0175 12 19.3575 12 18.6375V15.3575C12 14.6375 11.63 13.9775 11.03 13.6175L8.03 11.7875C7.72007 11.5974 7.36358 11.4968 7 11.4968C6.63642 11.4968 6.27993 11.5974 5.97 11.7875L2.97 13.6175Z"
+                  stroke="#FCFDFD"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </Space>
           </Button>
         </Col>
       </Form>

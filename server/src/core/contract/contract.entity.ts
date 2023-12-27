@@ -10,8 +10,11 @@ export class ContractModel implements Omit<IContract, '_id'> {
   @Prop({ type: SchemaTypes.String })
   title: string
 
-  @Prop({ type: SchemaTypes.ObjectId })
-  categoryId: Types.ObjectId
+  @Prop({ type: SchemaTypes.String })
+  description: string
+
+  @Prop({ type: SchemaTypes.String })
+  category: string
 
   @Prop({ type: SchemaTypes.String, index: true })
   owner: string
@@ -21,6 +24,12 @@ export class ContractModel implements Omit<IContract, '_id'> {
     default: [],
   })
   signatories: ISignatory[]
+
+  @Prop({
+    type: [{ type: SchemaTypes.String }],
+    default: [],
+  })
+  reviewers: string[]
 
   @Prop({ type: SchemaTypes.String })
   content: string
@@ -33,6 +42,9 @@ export class ContractModel implements Omit<IContract, '_id'> {
 
   @Prop({ type: SchemaTypes.Date })
   expirationDate: Date
+
+  @Prop({ type: SchemaTypes.Date })
+  signDeadline: Date
 
   @Prop({ type: SchemaTypes.Date })
   contractExpirationDate?: Date

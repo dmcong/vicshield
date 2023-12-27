@@ -37,7 +37,7 @@ export class ContractService {
       owner: wallet,
       base64Content: dto.content,
       signatories: dto.signatories,
-      expirationDate: dto.expirationDate,
+      expirationDate: new Date(dto.expirationDate).getTime(),
       value: dto.value,
       recipient: dto.recipient,
     })

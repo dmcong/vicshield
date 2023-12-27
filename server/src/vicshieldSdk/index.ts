@@ -36,7 +36,7 @@ export default class VicShieldSdk {
     owner: string
     base64Content: string
     signatories: string[]
-    expirationDate: Date
+    expirationDate: number
     value: string
     recipient: string
   }) {

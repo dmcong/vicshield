@@ -1,7 +1,17 @@
 .create-contract {
   input {
-    height: 48px;
+    height: 48px !important;
   }
+  .ant-select-selector {
+    height: 48px !important;
+  }
+  .ant-select-selection-item {
+    line-height: 48px !important;
+  }
+  .ant-picker {
+    width: 100%;
+  }
+
   .upload-file {
     border: none;
   }
@@ -10,9 +20,8 @@
 
     gap: var(--Container-padding, 10px);
     padding: 16px;
-
+    border: none;
     border-radius: var(--24, 24px);
-    background: #252533;
 
     .inner-border {
       border-radius: 16px;
@@ -47,6 +56,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+  }
+  .form-title {
+    color: #fff;
+
+    /* H3 */
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+  }
+  .btn-add-user {
+    .ant-space-item {
+      line-height: 0;
     }
   }
 }
