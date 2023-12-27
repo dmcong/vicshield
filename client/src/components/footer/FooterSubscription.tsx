@@ -62,8 +62,8 @@ function FooterSubscription() {
             slidesPerView={isMobile ? 3 : 5}
             modules={[Autoplay]}
           >
-            {LIST_FEATURE.concat(LIST_FEATURE).map((feature) => (
-              <SwiperSlide key={feature}>
+            {LIST_FEATURE.concat(LIST_FEATURE).map((feature, index) => (
+              <SwiperSlide key={index}>
                 <Button
                   style={{
                     borderRadius: 50,
@@ -95,8 +95,8 @@ function FooterSubscription() {
           >
             {LIST_FEATURE.concat(LIST_FEATURE)
               .reverse()
-              .map((feature) => (
-                <SwiperSlide key={feature}>
+              .map((feature, index) => (
+                <SwiperSlide key={index}>
                   <Button
                     style={{
                       borderRadius: 50,
