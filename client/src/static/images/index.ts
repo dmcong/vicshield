@@ -12,12 +12,14 @@ import OneID from './oneId.png'
 import InAppChatting from './inAppChatting.png'
 import UploadDoc from './uploadDoc.png'
 import Close from './close.png'
-import RoadMapTotal from './roadmapTotal.svg'
+import RoadMapTotal from './roadmapTotal.png'
+
 import TheFuture from './theFuture.png'
-import Q1 from './Q1-2024.png'
-import Q2 from './Q2-2024.png'
-import Q3 from './Q3-2024.png'
-import Q4 from './Q4-2024.png'
+import Q4_2023 from './Q4-2023.png'
+import Q1_2024 from './Q1-2024.png'
+import Q2_2024 from './Q2-2024.png'
+import Q3_2024 from './Q3-2024.png'
+import Q4_2024 from './Q4-2024.png'
 
 import TheFutureMobile from './theFuMobile.png'
 
@@ -39,10 +41,11 @@ const images = {
   roadMapTotal: RoadMapTotal,
   theFuture: TheFuture,
   theFutureMobile: TheFutureMobile,
-  Q1: Q1,
-  Q2: Q2,
-  Q3: Q3,
-  Q4: Q4,
+  Q4_2023,
+  Q1_2024,
+  Q2_2024,
+  Q3_2024,
+  Q4_2024,
 }
 
 export default images

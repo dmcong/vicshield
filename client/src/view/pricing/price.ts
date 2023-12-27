@@ -33,12 +33,17 @@ export const PRICE_PACKAGES: IPackage[] = [
       },
       {
         id: 3,
-        title: 'Unlimited Access',
+        title: 'Support from community',
         checked: true,
       },
       {
         id: 4,
         title: 'No storage or Integrations',
+        checked: false,
+      },
+      {
+        id: 5,
+        title: 'No reports & analytics',
         checked: false,
       },
     ],
@@ -53,7 +58,7 @@ export const PRICE_PACKAGES: IPackage[] = [
     features: [
       {
         id: 1,
-        title: 'Singer User',
+        title: 'Up to 50 users',
         checked: true,
       },
       {
@@ -63,12 +68,27 @@ export const PRICE_PACKAGES: IPackage[] = [
       },
       {
         id: 3,
-        title: 'Unlimited Access',
+        title: 'Support from helpdesk',
         checked: true,
       },
       {
         id: 4,
+        title: 'Organizational Features',
+        checked: true,
+      },
+      {
+        id: 5,
+        title: '3rd-party integration',
+        checked: true,
+      },
+      {
+        id: 6,
         title: 'Storage or Integrations',
+        checked: true,
+      },
+      {
+        id: 7,
+        title: 'Reports & analytics',
         checked: true,
       },
     ],
@@ -79,11 +99,11 @@ export const PRICE_PACKAGES: IPackage[] = [
   },
   {
     id: 3,
-    title: 'Custom',
+    title: 'Custom Plan',
     features: [
       {
         id: 1,
-        title: 'Singer User',
+        title: 'Unlimited users',
         checked: true,
       },
       {
@@ -93,12 +113,37 @@ export const PRICE_PACKAGES: IPackage[] = [
       },
       {
         id: 3,
-        title: 'Unlimited Access',
+        title: 'Dedicated support',
         checked: true,
       },
       {
         id: 4,
+        title: 'Organizational Features',
+        checked: true,
+      },
+      {
+        id: 5,
+        title: '3rd-party integration',
+        checked: true,
+      },
+      {
+        id: 6,
         title: 'Storage or Integrations',
+        checked: true,
+      },
+      {
+        id: 7,
+        title: 'Reports & analytics',
+        checked: true,
+      },
+      {
+        id: 8,
+        title: 'White-label configuration',
+        checked: true,
+      },
+      {
+        id: 9,
+        title: 'Tailor-made approval layers',
         checked: true,
       },
     ],

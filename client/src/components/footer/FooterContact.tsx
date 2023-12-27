@@ -47,9 +47,9 @@ function FooterContact() {
 
               <Col span={24}>
                 <Typography.Text>
-                  Priority Labeling
+                  Tracking
                   <Typography.Text style={{ marginLeft: 16 }} type="secondary">
-                    v2
+                    v1
                   </Typography.Text>
                 </Typography.Text>
               </Col>
