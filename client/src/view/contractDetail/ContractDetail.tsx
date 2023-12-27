@@ -1,12 +1,14 @@
 import { useContractData } from 'providers/contract.provider'
 import { useParams } from 'react-router-dom'
-import { Col, Row, Tag, Typography } from 'antd'
+import { Col, Row, Space, Tag, Typography } from 'antd'
 import { shortenAddress } from 'utils'
 import SpaceVertical from 'components/system/space-vervical/SpaceVertical'
 import { PropsWithChildren } from 'react'
 import moment from 'moment'
 import PdfViewer from 'components/pdf/pdfViewer'
 import PdfReviewer from 'components/pdf/pdfReviewer'
+import { FilePdfFilled as PdfIcon } from '@ant-design/icons'
+import useIsMobile from 'hooks/system/useIsMobile'
 
 function ContractDetailField({
   title,
@@ -34,6 +36,7 @@ function ContractDetail() {
   const id = useParams().id
 
   const data = useContractData(id ?? '')
+  const isMobile = useIsMobile()
 
   console.log({ data })
   if (!data) return null
@@ -83,31 +86,36 @@ function ContractDetail() {
             </SpaceVertical>
           </Col>
 
-          <Col span={12}>
+          <Col span={!isMobile ? 12 : 24}>
             <ContractDetailField title="Title">
-              <Typography.Text>Title Contract</Typography.Text>
+              <Typography.Text>{data.title}</Typography.Text>
             </ContractDetailField>
           </Col>
 
-          <Col span={12}>
+          <Col span={!isMobile ? 12 : 24}>
             <ContractDetailField title="Contract File">
-              <Typography.Text>Title Contract</Typography.Text>
+              <Space style={{ color: '#0A8FDC' }}>
+                <PdfIcon />
+                <Typography.Text style={{ color: '#0A8FDC' }}>
+                  {data.title}.pdf
+                </Typography.Text>
+              </Space>
             </ContractDetailField>
           </Col>
 
-          <Col span={6}>
+          <Col span={!isMobile ? 6 : 12}>
             <ContractDetailField title="Owner Contract">
               <Typography.Text>{shortenAddress(data.owner)}</Typography.Text>
             </ContractDetailField>
           </Col>
 
-          <Col span={6}>
+          <Col span={!isMobile ? 6 : 12}>
             <ContractDetailField title="Category">
               <Typography.Text>{data.categoryId ?? 'Category'}</Typography.Text>
             </ContractDetailField>
           </Col>
 
-          <Col span={6}>
+          <Col span={!isMobile ? 6 : 12}>
             <ContractDetailField title="Create At">
               <Typography.Text>
                 {moment(data.createdAt).format('YYYY-MM-DD HH:mm')}
@@ -115,7 +123,7 @@ function ContractDetail() {
             </ContractDetailField>
           </Col>
 
-          <Col span={6}>
+          <Col span={!isMobile ? 6 : 12}>
             <ContractDetailField title="Status">
               <Tag color="green" style={{ padding: '4px 8px' }}>
                 Signed

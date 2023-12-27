@@ -6,8 +6,9 @@ function BtnConnectWallet() {
   return (
     <div className="btn-connect-wallet">
       <ConnectButton
-        label="Use VicShield"
+        label="Connect Wallet"
         accountStatus={{ smallScreen: 'avatar', largeScreen: 'full' }}
+        chainStatus={{ smallScreen: 'icon', largeScreen: 'full' }}
       />
     </div>
   )
