@@ -55,11 +55,13 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
     "react-scripts": "5.0.1",
+    "react-ui-scrollspy": "^2.3.0",
     "react-use": "^17.4.0",
     "swiper": "^9.4.1",
     "viem": "^1.21.0",
     "wagmi": "^1.4.12",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

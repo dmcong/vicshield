@@ -12,26 +12,43 @@ import useIsMobile from 'hooks/system/useIsMobile'
 import { COLORS } from 'themes/colors'
 
 import { Styles } from 'type/styles.type'
-import type { MenuProps } from 'antd'
+import { type MenuProps, Typography } from 'antd'
+import { useScrollSpyStore } from 'stores/useScrollSpy.store'
 
 import './index.less'
 
 const items: MenuProps['items'] = [
   {
-    label: 'Solution',
-    key: '1',
+    label: (
+      <Typography.Text data-to-scrollspy-id="solution-section">
+        Solution
+      </Typography.Text>
+    ),
+    key: 'solution-section',
   },
   {
-    label: 'Feature',
-    key: '2',
+    label: (
+      <Typography.Text data-to-scrollspy-id="feature-section">
+        Feature
+      </Typography.Text>
+    ),
+    key: 'feature-section',
   },
   {
-    label: 'Roadmap',
-    key: '3',
+    label: (
+      <Typography.Text data-to-scrollspy-id="roadmap-section">
+        Roadmap
+      </Typography.Text>
+    ),
+    key: 'roadmap-section',
   },
   {
-    label: 'Pricing',
-    key: '4',
+    label: (
+      <Typography.Text data-to-scrollspy-id="pricing-section">
+        Pricing
+      </Typography.Text>
+    ),
+    key: 'pricing-section',
   },
 ]
 
@@ -63,6 +80,8 @@ const TopMenu = () => {
 
   const navigate = useNavigate()
 
+  const { activeSection, setActiveSection } = useScrollSpyStore()
+
   const isLandingPage = useMemo(
     () => router.pathname === '/home',
     [router.pathname],
@@ -79,7 +98,18 @@ const TopMenu = () => {
   }
 
   const onClick: MenuProps['onClick'] = (e) => {
+    const target = window.document.getElementById(e.key)
+
+    if (target) {
+      const position = target.getBoundingClientRect().top + window.scrollY - 100
+
+      window.scrollTo({
+        top: position,
+        behavior: 'smooth',
+      })
+    }
     setCurrent(e.key)
+    setActiveSection(e.key)
   }
 
   const renderHamburger = () => {
@@ -113,7 +143,7 @@ const TopMenu = () => {
               <Menu
                 onClick={onClick}
                 style={styles.menu}
-                selectedKeys={[current]}
+                selectedKeys={[activeSection]}
                 mode={'inline'}
                 items={items}
               />
@@ -141,6 +171,7 @@ const TopMenu = () => {
             backdropFilter: 'blur(10px)',
             maxWidth: 1160,
           }}
+          className="top-menu-section"
         >
           <Row className={'menu'} style={styles.container}>
             <Row
@@ -153,7 +184,7 @@ const TopMenu = () => {
               <Menu
                 onClick={onClick}
                 style={styles.menu}
-                selectedKeys={[current]}
+                selectedKeys={[activeSection]}
                 mode="horizontal"
                 items={items}
                 className="menu-header"
